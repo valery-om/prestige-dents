@@ -292,6 +292,10 @@ Only "Детская стоматология" needs descriptions filled.
 - Write first 3 high-priority articles
 - Write remaining 7 articles
 - Fact-check all articles
+- **Content source:** 150 existing posts from copywriter (3 years of content)
+  - Archive: `1QL0gLrpVW1Ze93GIE3w4N6Y5B3lolICPMZcmAElABAY`
+  - 9 categories: Лечение (44), Уход (45), Проф. гигиена (13), Дети (11), О клинике (11), Отбеливание (8), Виниры (7), Имплантация (6), Брекеты (5)
+  - Can be rewritten into long-form SEO blog articles with FAQ schema
 
 ### Phase 5: Forms & Integrations
 - Online appointment form (WhatsApp / email / Telegram)
@@ -306,14 +310,23 @@ Only "Детская стоматология" needs descriptions filled.
 - Update links in Yandex Business, 2GIS, GBP
 - Deactivate Tilda (only after new site is fully working)
 
-## Data Source
+## Data Sources
 
-Google Sheets: `1hIb1akbx75_t5pkmUvx0imbynd7gDiC5AGjc-djCmRg`
-
-Sheets:
-- **Общая информация** — clinic details, contacts, design, analytics
+### Working sheet: `1hIb1akbx75_t5pkmUvx0imbynd7gDiC5AGjc-djCmRg`
+- **Общая информация** — clinic details, contacts, license, design, analytics
 - **Услуги** — services by category with prices and SEO titles
-- **Врачи** — doctors with specializations and photos
+- **Врачи** — 14 doctors with short + long descriptions
 - **Блог** — 10 planned articles with keywords
-- **SEO и внешнее** — external SEO tasks and analytics
+- **SEO и внешнее** — external SEO tasks, aggregators, analytics
 - **План работ** — phased task list with dependencies
+- **врачи (анкеты)** — raw questionnaire responses from 13 doctors
+- **агрегаторы+соцсети** — links to all external profiles
+- **ссылки на диск** — Yandex Disk links (licenses, certificates, logo, guides)
+- **Гайды** — full text of implantation + orthodontics guides
+
+### Copywriter archive: `1QL0gLrpVW1Ze93GIE3w4N6Y5B3lolICPMZcmAElABAY`
+- 150 posts across 9 categories (3 years of content)
+- Source material for blog articles rewrite
+
+### Old contractor TZ: `1Y8kXUk1hhLy38B4OSPpGyG-88VP1-Ga9PwiF5Jnoa6E` (read-only)
+### Price list: `1-6gTj1q4ENfTsBILc_LuY4SONO4EpI73CnLVbqEMLJ8` (read-only)
