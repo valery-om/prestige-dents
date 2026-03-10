@@ -59,6 +59,33 @@
 | Like.doctor | ✅ Active |
 | stom-firms.ru | ❌ Not in Magnitogorsk |
 
+### AI в клинике
+- **DianApp** (dianapp.online) — AI-анализ гигиены полости рта
+- **Diagnocat** (diagnocat.ru) — AI-анализ рентгеновских снимков (КЛКТ)
+
+### Equipment (19 items, premium import)
+| # | Equipment | Manufacturer | Country |
+|---|-----------|-------------|---------|
+| 1 | КТ Point 3D | Vatech/POINTNIX (уточнить) | Южная Корея |
+| 2 | Рентген интраоральный | Dentsply Sirona | Германия |
+| 3 | Автоклав | MEGAL | Германия |
+| 4 | Дефибриллятор | Philips | Япония |
+| 5 | Микроскоп Zumax 2050 | Zumax | Китай |
+| 6-8 | Лампы полимеризационные | Kerr (США), Bien Air (Китай), Woodpecker (Китай) | |
+| 9 | Компрессор | EKOM | Словакия |
+| 10 | УФ-камера | Ferroplast Medical | Россия |
+| 11 | Автоклав | MEGAL | Германия |
+| 12 | Assistina | W&H | Австрия |
+| 13 | Стоматологические установки | Sirona Intego | Германия |
+| 14 | Наконечники турбинные | W&H | Австрия |
+| 15 | Эндомотор | Dentsply Maillefer | Швейцария |
+| 16 | Эндомотор | Geosoft | Россия |
+| 17 | Щипцы | Hu-Friedy | США |
+| 18 | Упаковочное устройство | MEGAL | Германия |
+| 19 | Апекслокатор | Forum Engineering | Германия |
+
+**Уточнить модели:** FotoSan (CMS Dental), Лазер Doctor Smile, 3D сканер 3Shape (TRIOS?), Air Flow (EMS)
+
 ## Goal
 
 Rebuild the dental clinic website from Tilda to a modern Astro stack with full local SEO, blog, and structured data — to maximize organic traffic from search engines and AI systems.
@@ -327,6 +354,12 @@ Only "Детская стоматология" needs descriptions filled.
 ### Copywriter archive: `1QL0gLrpVW1Ze93GIE3w4N6Y5B3lolICPMZcmAElABAY`
 - 150 posts across 9 categories (3 years of content)
 - Source material for blog articles rewrite
+
+### AI-generated content (assistant): `19kNK5ym9aRClxtH6bzthZ_5H6jDQwNMJRBVs_sbOq94`
+- Content plan with topics (post'5, post'6) — use as ideas only
+- Video-визитки template — use for doctor pages
+- Video plan (clinic tour, equipment, process) — use for /o-klinike/
+- Texts are AI slop — do NOT use for blog, rewrite from scratch
 
 ### Old contractor TZ: `1Y8kXUk1hhLy38B4OSPpGyG-88VP1-Ga9PwiF5Jnoa6E` (read-only)
 ### Price list: `1-6gTj1q4ENfTsBILc_LuY4SONO4EpI73CnLVbqEMLJ8` (read-only)
