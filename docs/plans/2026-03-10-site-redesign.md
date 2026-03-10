@@ -161,7 +161,7 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 /privacy/                            — Privacy policy
 ```
 
-## Team (15 doctors found)
+## Team (14 doctors found)
 
 | # | Name | Role | Experience | Status |
 |---|------|------|-----------|--------|
@@ -173,13 +173,12 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 | 6 | Слинкина Р.И. | Терапевт | 32 года | Ready |
 | 7 | Сотникова М.А. | Терапевт | 23 года | Ready |
 | 8 | Чирков Д.С. | Терапевт | 10 лет | Ready |
-| 9 | Телкова В.И. | Ортодонт | 8 лет | Ready |
-| 10 | Осинская Л.А. | Хирург | 4 года | Ready |
-| 11 | Дубинина И.В. | Терапевт | 27 лет | Need photo |
-| 12 | Доценко Д.О. | Хирург | 8 лет | Ready |
+| 9 | Осинская Л.А. | Хирург | 4 года | Ready |
+| 10 | Дубинина И.В. | Терапевт | 27 лет | Need photo |
+| 11 | Доценко Д.О. | Хирург | 8 лет | Ready |
+| 12 | Толкачева Е.В. | Ортодонт | 5 лет | Need photo |
 | 13 | Ширяева Н.В. | Гигиенист | — | Waiting for info |
 | 14 | Крафт Н.Л. | — | — | Waiting for info |
-| 15 | Толкачева Е.В. | Ортодонт | 5 лет | Need photo |
 
 ## Services (14 confirmed)
 
