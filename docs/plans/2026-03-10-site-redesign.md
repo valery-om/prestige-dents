@@ -95,12 +95,100 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 - [ ] Yandex Webmaster verification
 - [ ] Google Search Console verification
 
+## Requirements from Previous TZ (not in initial plan)
+
+### 1. Accessibility: version for visually impaired (REQUIRED by RF law)
+- Toggle button in header "Версия для слабовидящих"
+- Switches to high contrast, large fonts, no animations
+- Must work on all devices
+- **This is a legal requirement for medical websites in Russia**
+
+### 2. Licenses page
+- Separate page `/licenzii/` with scanned licenses
+- Date of issue, issuing authority, validity period
+- Accessible from main navigation
+
+### 3. Doctor certificates/education scans
+- Each doctor profile should include scans of training certificates
+- Can be displayed as gallery or accordion
+
+### 4. Video content
+- Support for embedded video on pages (clinic tour, doctor introductions)
+- YouTube/RuTube embeds
+
+### 5. ZOON widget
+- Embed ZOON reviews widget for social proof + aggregated rating
+
+### 6. Lead magnets
+- "7 ошибок ухода за зубами" — for primary consultation
+- "Расширенный гайд по имплантации" — for implantation page
+- "Гайд по брекетам и элайнерам" — for orthodontics page
+- Form: download in exchange for contact info
+
+### 7. Callback/appointment popups
+- Popup "Заказать обратный звонок"
+- Sticky "Онлайн-запись" button
+- Minimal fields: name + phone
+
+## Updated Site Structure
+
+```
+/                                    — Home
+/uslugi/                             — Services catalog
+/uslugi/terapiya/                    — Dental therapy
+/uslugi/implantaciya/                — Implants
+/uslugi/protezirovanie/              — Prosthetics
+/uslugi/ortodontiya/                 — Orthodontics (braces + aligners)
+/uslugi/gigiena-i-otbelivanie/       — Cleaning & whitening
+/uslugi/hirurgiya/                   — Surgery
+/uslugi/detskaya-stomatologiya/      — Pediatric
+/uslugi/diagnostika/                 — CT scan (КЛКТ)
+/uslugi/parodontologiya/             — Periodontics (NEW)
+/vrachi/                             — Doctors list
+/vrachi/[slug]/                      — Doctor profile + certificates gallery
+/ceny/                               — Price list
+/otzyvy/                             — Reviews + ZOON widget
+/o-klinike/                          — About (values, equipment, photos, video)
+/licenzii/                           — Licenses (NEW — legal requirement)
+/kontakty/                           — Contacts + Yandex Map
+/blog/                               — Blog index
+/blog/[slug]/                        — Blog post
+/aktsii/                             — Promotions
+/privacy/                            — Privacy policy
+```
+
+## Team (14 doctors found)
+
+| # | Name | Role | Experience | Status |
+|---|------|------|-----------|--------|
+| 1 | Антошкин И.В. | Стоматолог | 6 лет | Ready |
+| 2 | Доценко А.Г. | Терапевт, зам. главврача | 9 лет | Ready |
+| 3 | Зуевский М.К. | Ортопед | 23 года | Ready |
+| 4 | Мухамедьянова А.И. | Гигиенист | — | Ready |
+| 5 | Савинкова М.С. | Зубной врач | 15 лет | Ready (old photo) |
+| 6 | Слинкина Р.И. | Терапевт | 32 года | Ready |
+| 7 | Сотникова М.А. | Терапевт | 23 года | Ready |
+| 8 | Чирков Д.С. | Терапевт | 10 лет | Ready |
+| 9 | Телкова В.И. | Ортодонт | 8 лет | Ready |
+| 10 | Осинская Л.А. | Хирург | 4 года | Ready |
+| 11 | Дубинина И.В. | Терапевт | 27 лет | Need photo |
+| 12 | Доценко Д.О. | Хирург | 8 лет | Ready |
+| 13 | Ширяева Н.В. | Гигиенист | — | Waiting for info |
+| 14 | Крафт Н.Л. | — | — | Waiting for info |
+
+## Services (14 confirmed)
+
+All services have short + long descriptions and pricing from the previous TZ.
+See "Услуги" sheet in Google Sheets for full data.
+Only "Детская стоматология" needs descriptions filled.
+
 ## Design
 
 - **Primary color:** #3ca4cb (blue) — keep from current site
 - **Font:** Inter — keep from current site
 - **Style:** Clean, modern, medical — trust and professionalism
 - **Mobile-first responsive design**
+- **Accessibility:** High-contrast mode toggle (legal requirement)
 
 ## Phases
 
