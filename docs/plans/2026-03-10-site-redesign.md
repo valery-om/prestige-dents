@@ -1,7 +1,8 @@
 # Prestige Dents — Site Redesign Plan
 
 **Date:** 2026-03-10
-**Status:** Phase 1 COMPLETE — ready for Phase 2
+**Status:** Phase 2 IN PROGRESS — design approved, implementation planning
+**Phase 2 Design:** `2026-03-10-phase2-design.md`
 **Current site:** prestige-dents.ru (Tilda)
 **New stack:** Astro + Tailwind + Vercel
 **Repo:** valery-om/prestige-dents
