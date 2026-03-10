@@ -1,10 +1,63 @@
 # Prestige Dents — Site Redesign Plan
 
 **Date:** 2026-03-10
-**Status:** Planning
+**Status:** Phase 1 COMPLETE — ready for Phase 2
 **Current site:** prestige-dents.ru (Tilda)
 **New stack:** Astro + Tailwind + Vercel
 **Repo:** valery-om/prestige-dents
+
+## Clinic Details (collected)
+
+| Field | Value |
+|-------|-------|
+| Name | Семейная стоматология «Престиж» |
+| Legal entity | ООО «ВИД», ИНН 7445042270, ОГРН 1087445004107 |
+| License | Л041-01024-74/00332049 от 07.06.2019, Минздрав Челябинской области (действует) |
+| Address | 455048, Челябинская область, г. Магнитогорск, просп. Ленина, 131, корп. 1, пом. 5, 6 |
+| District | Орджоникидзевский район |
+| Phone | +7 (3519) 51-05-00 |
+| WhatsApp | +7 967 868 01 01 |
+| Email | prestig.vid@mail.ru |
+| Hours (weekdays) | Пн–Пт 9:00–20:00 |
+| Hours (weekends) | Сб, Вс 9:00–15:00 |
+| Coordinates | 53.3695096, 58.9922979 |
+| Slogan | Ваша улыбка — наш престиж |
+| Primary color | #3ca4cb |
+| Font | Inter |
+
+### Licensed activities
+- Ортодонтия
+- Стоматология детская
+- Стоматология общей практики
+- Стоматология ортопедическая
+- Стоматология терапевтическая
+- Стоматология хирургическая
+- Рентгенология
+
+### Social media
+| Platform | Link |
+|----------|------|
+| Instagram | https://www.instagram.com/prestige_mgn/ |
+| VK | https://vk.com/prestige_mgn |
+| OK | https://ok.ru/group/68846077870137 |
+
+### Aggregators (12 platforms)
+| Platform | Status |
+|----------|--------|
+| Яндекс Карты | ✅ Active |
+| Google Maps / GBP | ⬜ Card exists, access requested |
+| 2GIS | ✅ Active |
+| Prodoctorov | ✅ Active |
+| Zoon | ✅ Active |
+| Flamp | ✅ Active |
+| Напоправку.ru | ✅ Active |
+| 32top.ru | ✅ Active |
+| Doctu.ru | ✅ Active |
+| Yell.ru | ✅ Active |
+| Kleos.ru | ✅ Active |
+| Medicina99.ru | ✅ Active |
+| Like.doctor | ✅ Active |
+| stom-firms.ru | ❌ Not in Magnitogorsk |
 
 ## Goal
 
@@ -73,10 +126,14 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 - [ ] Unified contacts in footer + contacts page + schema
 
 ### 3. External Local SEO
-- [ ] Verify/update Yandex Business profile
-- [ ] Create/update Google Business Profile
-- [ ] Update 2GIS card
-- [ ] Check prodoctorov.ru, zoon.ru, stom-firms.ru profiles
+- [x] Yandex Business — profile exists
+- [ ] Google Business Profile — card exists, access requested, awaiting verification
+- [x] 2GIS — profile exists
+- [x] prodoctorov.ru — profile exists
+- [x] zoon.ru — profile exists
+- [x] 8 more aggregators confirmed (Flamp, Напоправку, 32top, Doctu, Yell, Kleos, Medicina99, Like.doctor)
+- [ ] stom-firms.ru — not available in Magnitogorsk
+- [ ] Update site URL on all platforms after launch
 - [ ] Collect and respond to reviews on all platforms
 
 ### 4. Local Content (Blog)
@@ -204,9 +261,17 @@ Only "Детская стоматология" needs descriptions filled.
 
 ## Phases
 
-### Phase 1: Data Collection (Valeria)
-- Fill Google Sheets: clinic info, services, doctors, photos
-- Check external profiles (Yandex Business, 2GIS, GBP)
+### Phase 1: Data Collection (Valeria) ✅ COMPLETE
+- [x] Clinic info: name, address, phones, email, hours, coordinates, license, legal entity
+- [x] Services: 16 services with descriptions and prices
+- [x] Doctors: 14 doctors with short + long descriptions from questionnaires
+- [x] External profiles: 12 aggregators confirmed, GBP access requested
+- [x] Social media: Instagram, VK, OK — links collected
+- [x] Assets on Yandex Disk: licenses, certificates, logo, brand book, 4 guides (PDF)
+- [x] License verified: Л041-01024-74/00332049, действует
+- [ ] Pending: photos for Дубинина И.В. and Толкачева Е.В.
+- [ ] Pending: info for Ширяева Н.В. and Крафт Н.Л.
+- [ ] Pending: descriptions for Детская стоматология service
 - **Sheet:** https://docs.google.com/spreadsheets/d/1hIb1akbx75_t5pkmUvx0imbynd7gDiC5AGjc-djCmRg
 
 ### Phase 2: Foundation
