@@ -119,15 +119,23 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 ### 5. ZOON widget
 - Embed ZOON reviews widget for social proof + aggregated rating
 
-### 6. Lead magnets
-- "7 ошибок ухода за зубами" — for primary consultation
-- "Расширенный гайд по имплантации" — for implantation page (TEXT READY, ~31K chars)
-- "Гайд по брекетам и элайнерам" — for orthodontics page (TEXT READY, ~22K chars)
+### 6. Lead magnets (4 guides available)
+- "Гайд для мам" — pediatric dentistry page (DESIGNED PDF on Yandex Disk)
+- "Гайд для жителей МГН" — general / homepage (DESIGNED PDF on Yandex Disk)
+- "Расширенный гайд по имплантации" — implantation page (TEXT ~31K chars + DESIGNED PDF)
+- "Гайд по брекетам и элайнерам" — orthodontics page (TEXT ~22K chars + DESIGNED PDF)
 - Form: download in exchange for contact info
-- Both guides already designed for print — can also be used as:
+- All 4 guides already designed for print — can also be used as:
   - Downloadable PDF (lead magnet: contact → guide)
   - Full blog articles with FAQ schema (for AI search indexing)
   - Or both simultaneously (PDF for download + article version on site)
+
+### Assets on Yandex Disk
+- Licenses: https://disk.yandex.ru/d/hynIvr45jlkFxQ
+- Sanitary certificates (СЭЗ): https://disk.yandex.ru/d/HrB78YUteI1DzA
+- Doctor certificates: https://disk.yandex.ru/d/K4MwRhpVkRWUcg
+- Logo + brand book: https://disk.yandex.ru/d/8ojOmcPhTlb1rw
+- 2 large guides (implantation + orthodontics): https://disk.yandex.ru/d/CVUvupG6dT4NDw
 
 ### 7. Callback/appointment popups
 - Popup "Заказать обратный звонок"
