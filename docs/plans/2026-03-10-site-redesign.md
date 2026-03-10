@@ -121,9 +121,13 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 
 ### 6. Lead magnets
 - "7 ошибок ухода за зубами" — for primary consultation
-- "Расширенный гайд по имплантации" — for implantation page
-- "Гайд по брекетам и элайнерам" — for orthodontics page
+- "Расширенный гайд по имплантации" — for implantation page (TEXT READY, ~31K chars)
+- "Гайд по брекетам и элайнерам" — for orthodontics page (TEXT READY, ~22K chars)
 - Form: download in exchange for contact info
+- Both guides already designed for print — can also be used as:
+  - Downloadable PDF (lead magnet: contact → guide)
+  - Full blog articles with FAQ schema (for AI search indexing)
+  - Or both simultaneously (PDF for download + article version on site)
 
 ### 7. Callback/appointment popups
 - Popup "Заказать обратный звонок"
@@ -157,7 +161,7 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 /privacy/                            — Privacy policy
 ```
 
-## Team (14 doctors found)
+## Team (15 doctors found)
 
 | # | Name | Role | Experience | Status |
 |---|------|------|-----------|--------|
@@ -175,6 +179,7 @@ Rebuild the dental clinic website from Tilda to a modern Astro stack with full l
 | 12 | Доценко Д.О. | Хирург | 8 лет | Ready |
 | 13 | Ширяева Н.В. | Гигиенист | — | Waiting for info |
 | 14 | Крафт Н.Л. | — | — | Waiting for info |
+| 15 | Толкачева Е.В. | Ортодонт | 5 лет | Need photo |
 
 ## Services (14 confirmed)
 
