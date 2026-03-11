@@ -1,36 +1,128 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import clinic from '../data/clinic.json';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const doctors = (await getCollection('doctors'))
+  .filter(d => d.data.order <= 10)
+  .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout>
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[1280px] mx-auto text-center space-y-6">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+  <!-- Hero -->
+  <section class="py-[var(--section-py)] px-[var(--section-px)] relative overflow-hidden">
+    <div class="max-w-[1280px] mx-auto text-center space-y-6 relative z-10">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold reveal">
         {clinic.name}
       </h1>
-      <p class="text-xl text-[var(--text-muted)] max-w-2xl mx-auto">
+      <p class="text-xl md:text-2xl text-[var(--text-muted)] max-w-2xl mx-auto reveal reveal-d1">
         {clinic.slogan}
       </p>
-      <div class="flex justify-center gap-4 pt-4">
+      <p class="text-lg text-[var(--text-muted)] max-w-xl mx-auto reveal reveal-d2">
+        Современная стоматология с AI-диагностикой для всей семьи в Магнитогорске
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 pt-4 reveal reveal-d3">
         <a href="/uslugi/" class="btn-brand">Наши услуги</a>
         <a href="/kontakty/#zapis" class="btn-cta">Записаться</a>
       </div>
     </div>
   </section>
 
-  <!-- Placeholder sections for Phase 3 -->
+  <!-- USP -->
   <section class="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--bg-alt)]">
     <div class="max-w-[1280px] mx-auto">
-      <h2 class="text-2xl font-bold mb-8">Услуги</h2>
-      <p class="text-[var(--text-muted)]">Контент услуг будет добавлен в Phase 3.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card text-center reveal">
+          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">4.9</div>
+          <p class="text-sm text-[var(--text-muted)]">Рейтинг в 2ГИС — лучший в городе</p>
+        </div>
+        <div class="glass-card text-center reveal reveal-d1">
+          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">AI</div>
+          <p class="text-sm text-[var(--text-muted)]">Diagnocat + DianApp — AI-диагностика</p>
+        </div>
+        <div class="glass-card text-center reveal reveal-d2">
+          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">14</div>
+          <p class="text-sm text-[var(--text-muted)]">Врачей, включая стажировки в Израиле</p>
+        </div>
+        <div class="glass-card text-center reveal reveal-d3">
+          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">0</div>
+          <p class="text-sm text-[var(--text-muted)]">Боли — безболезненная анестезия гелем</p>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Services -->
   <section class="py-[var(--section-py)] px-[var(--section-px)]">
     <div class="max-w-[1280px] mx-auto">
-      <h2 class="text-2xl font-bold mb-8">Наши врачи</h2>
-      <p class="text-[var(--text-muted)]">Контент врачей будет добавлен в Phase 3.</p>
+      <h2 class="text-2xl md:text-3xl font-bold mb-2 reveal">Услуги</h2>
+      <p class="text-[var(--text-muted)] mb-8 reveal reveal-d1">Полный спектр стоматологических услуг для всей семьи</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service, i) => (
+          <a href={`/uslugi/${service.data.slug}/`} class={`glass-card block group reveal reveal-d${Math.min(i % 3 + 1, 3)}`}>
+            <h3 class="text-lg font-semibold mb-2 group-hover:text-[var(--color-brand)] transition-colors">
+              {service.data.title}
+            </h3>
+            {service.data.priceFrom && (
+              <p class="text-sm font-semibold text-[var(--color-brand)]">
+                от {service.data.priceFrom.toLocaleString('ru-RU')} ₽
+              </p>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8 reveal">
+        <a href="/ceny/" class="btn-outline">Все цены</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doctors -->
+  <section class="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--bg-alt)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-2 reveal">Наши врачи</h2>
+      <p class="text-[var(--text-muted)] mb-8 reveal reveal-d1">Команда из 14 специалистов с опытом от 4 до 32 лет</p>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {doctors.slice(0, 5).map((doctor, i) => (
+          <a href={`/vrachi/${doctor.data.slug}/`} class={`glass-card block group text-center reveal reveal-d${Math.min(i % 3 + 1, 3)}`}>
+            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--bg-alt)] mb-3">
+              {doctor.data.photo ? (
+                <img src={doctor.data.photo} alt={doctor.data.name} class="w-full h-full object-cover" loading="lazy" />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
+                  <svg class="w-8 h-8 opacity-30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+            <p class="text-sm font-semibold group-hover:text-[var(--color-brand)] transition-colors">{doctor.data.name.split(' ').slice(0, 2).join(' ')}</p>
+            <p class="text-xs text-[var(--text-muted)] mt-1">{doctor.data.specialty}</p>
+          </a>
+        ))}
+      </div>
+
+      <div class="text-center mt-8 reveal">
+        <a href="/vrachi/" class="btn-outline">Все врачи</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[800px] mx-auto text-center reveal">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Запишитесь на приём</h2>
+      <p class="text-lg text-[var(--text-muted)] mb-6">
+        Позвоните или напишите в WhatsApp — администратор подберёт удобное время.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={`tel:${clinic.phoneRaw}`} class="btn-brand">{clinic.phone}</a>
+        <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="btn-cta">Написать в WhatsApp</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

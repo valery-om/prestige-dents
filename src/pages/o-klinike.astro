@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import clinic from '../data/clinic.json';
+---
+
+<BaseLayout
+  title={`О клинике — ${clinic.name}`}
+  description={`${clinic.name} в ${clinic.address.city}. Семейная стоматология с 2008 года. AI-диагностика, 19 единиц импортного оборудования, врачи с международным опытом.`}
+  breadcrumbs={[{ name: 'О клинике', url: 'https://prestige-dents.ru/o-klinike/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'О клинике', url: '/o-klinike/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[800px] mx-auto service-content">
+      <h1 class="text-3xl md:text-4xl font-bold mb-6">О клинике</h1>
+
+      <p class="text-lg text-[var(--text-muted)] mb-8">
+        Семейная стоматология «Престиж» работает в Магнитогорске с 2008 года. За это время мы стали клиникой, которой доверяют семьи — рейтинг 4.9 в 2ГИС, более 270 отзывов.
+      </p>
+
+      <h2>Наш подход</h2>
+      <p><strong>«Ваша улыбка — наш престиж»</strong> — не просто слоган. Мы совмещаем высокие технологии с человеческой заботой: от безболезненной анестезии гелем до AI-диагностики.</p>
+
+      <h2>Технологии</h2>
+      <ul>
+        <li><strong>AI-диагностика Diagnocat</strong> — анализ КЛКТ-снимков искусственным интеллектом для точного планирования лечения</li>
+        <li><strong>DianApp</strong> — оценка гигиены полости рта по фотографии</li>
+        <li><strong>Компьютерная томография (КЛКТ)</strong> — 3D-снимок всей челюсти за 15 секунд</li>
+        <li><strong>19 единиц импортного оборудования</strong> — Sirona, W&H, Dentsply, Hu-Friedy</li>
+      </ul>
+
+      <h2>Команда</h2>
+      <p>14 врачей с опытом от 4 до 32 лет. Двое специалистов прошли стажировку в Израиле. Регулярное повышение квалификации на курсах и конгрессах.</p>
+      <p><a href="/vrachi/" class="text-[var(--color-brand)] font-semibold">Познакомьтесь с нашими врачами →</a></p>
+
+      <h2>Для всей семьи</h2>
+      <p>Мы лечим пациентов любого возраста — от детей до людей старшего поколения. Терапия, протезирование, имплантация, ортодонтия, гигиена, хирургия, диагностика.</p>
+
+      <h2>Реквизиты</h2>
+      <ul>
+        <li>{clinic.legalName}, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</li>
+        <li>Лицензия: {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</li>
+        <li>Выдана: {clinic.license.authority}</li>
+      </ul>
+
+      <div class="mt-10 text-center">
+        <a href="/kontakty/#zapis" class="btn-cta">Записаться на приём</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

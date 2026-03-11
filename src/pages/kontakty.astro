@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import clinic from '../data/clinic.json';
+---
+
+<BaseLayout
+  title={`Контакты — ${clinic.name}`}
+  description={`Адрес, телефон, график работы стоматологии Престиж в Магнитогорске. ${clinic.address.street}. Записаться: ${clinic.phone}.`}
+  breadcrumbs={[{ name: 'Контакты', url: 'https://prestige-dents.ru/kontakty/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'Контакты', url: '/kontakty/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-8">Контакты</h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <!-- Contact info -->
+        <div class="space-y-6">
+          <div class="glass-card">
+            <h2 class="font-semibold mb-3">Адрес</h2>
+            <p class="text-[var(--text)]">{clinic.address.city}, {clinic.address.street}</p>
+            <p class="text-sm text-[var(--text-muted)]">{clinic.address.district}</p>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="font-semibold mb-3">Телефон</h2>
+            <a href={`tel:${clinic.phoneRaw}`} class="text-xl font-bold text-[var(--color-brand)]">{clinic.phone}</a>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="font-semibold mb-3">WhatsApp</h2>
+            <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="text-lg font-semibold text-[#25D366]">{clinic.whatsapp}</a>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="font-semibold mb-3">Email</h2>
+            <a href={`mailto:${clinic.email}`} class="text-[var(--color-brand)]">{clinic.email}</a>
+          </div>
+
+          <div class="glass-card">
+            <h2 class="font-semibold mb-3">График работы</h2>
+            <p>{clinic.hours.weekdays}</p>
+            <p>{clinic.hours.weekends}</p>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div>
+          <div class="rounded-xl overflow-hidden h-[400px] bg-[var(--bg-alt)]">
+            <iframe
+              src={`https://yandex.ru/map-widget/v1/?ll=${clinic.geo.longitude}%2C${clinic.geo.latitude}&z=16&pt=${clinic.geo.longitude}%2C${clinic.geo.latitude}%2Cpm2rdm`}
+              width="100%"
+              height="400"
+              style="border:0"
+              loading="lazy"
+              title="Карта — Стоматология Престиж"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointment section -->
+      <div id="zapis" class="mt-16 text-center">
+        <h2 class="text-2xl font-bold mb-4">Записаться на приём</h2>
+        <p class="text-[var(--text-muted)] mb-6 max-w-lg mx-auto">
+          Позвоните нам или напишите в WhatsApp — администратор подберёт удобное время.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href={`tel:${clinic.phoneRaw}`} class="btn-brand">Позвонить</a>
+          <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="btn-cta">Написать в WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
