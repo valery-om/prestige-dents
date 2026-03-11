@@ -1,0 +1,42 @@
+---
+---
+<button
+  id="accessibility-toggle"
+  aria-label="Версия для слабовидящих"
+  class="text-xs font-medium px-3 py-1.5 rounded-lg border border-current hover:bg-brand-pale transition-colors whitespace-nowrap"
+>
+  <svg class="inline w-4 h-4 mr-1 -mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+  </svg>
+  <span class="accessibility-label">Для слабовидящих</span>
+</button>
+
+<script is:inline>
+  (function() {
+    var btn = document.getElementById('accessibility-toggle');
+    var label = btn.querySelector('.accessibility-label');
+
+    function update() {
+      var isAccessible = document.documentElement.getAttribute('data-theme') === 'accessible';
+      label.textContent = isAccessible ? 'Обычная версия' : 'Для слабовидящих';
+    }
+
+    btn.addEventListener('click', function() {
+      var current = document.documentElement.getAttribute('data-theme');
+      if (current === 'accessible') {
+        var prev = localStorage.getItem('prestige-theme-before-accessible') || '';
+        document.documentElement.setAttribute('data-theme', prev);
+        localStorage.setItem('prestige-theme', prev);
+        localStorage.removeItem('prestige-theme-before-accessible');
+      } else {
+        localStorage.setItem('prestige-theme-before-accessible', current || '');
+        document.documentElement.setAttribute('data-theme', 'accessible');
+        localStorage.setItem('prestige-theme', 'accessible');
+      }
+      update();
+    });
+
+    update();
+  })();
+</script>
