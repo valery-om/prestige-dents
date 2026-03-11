@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+
+<BaseLayout
+  title="Цены на стоматологические услуги в Магнитогорске | Престиж"
+  description="Актуальные цены на стоматологические услуги в Магнитогорске. Лечение, протезирование, имплантация, ортодонтия, гигиена. Стоматология Престиж."
+  breadcrumbs={[{ name: 'Цены', url: 'https://prestige-dents.ru/ceny/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'Цены', url: '/ceny/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Цены</h1>
+      <p class="text-lg text-[var(--text-muted)] mb-10 max-w-2xl">
+        Актуальные цены на услуги. Точную стоимость лечения врач определит после осмотра.
+      </p>
+
+      <!-- Первичный приём -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4">Первичный приём</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]">
+              <th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th>
+              <th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th>
+            </tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Консультация терапевта</td><td class="py-3 px-4 text-right font-semibold">1 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Консультация пародонтолога</td><td class="py-3 px-4 text-right font-semibold">1 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Консультация хирурга</td><td class="py-3 px-4 text-right font-semibold">1 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Консультация ортопеда</td><td class="py-3 px-4 text-right font-semibold">1 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Повторный приём</td><td class="py-3 px-4 text-right font-semibold">250 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Терапия -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/terapiya/" class="hover:text-[var(--color-brand)] transition-colors">Терапия</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Пломба Vitremer (до 1/3 зуба)</td><td class="py-3 px-4 text-right font-semibold">1 200 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Пломба Vitremer (до 2/3 зуба)</td><td class="py-3 px-4 text-right font-semibold">1 600 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Фотополимерная реставрация (до 1/3)</td><td class="py-3 px-4 text-right font-semibold">от 5 800 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Фотополимерная реставрация (до 1/2)</td><td class="py-3 px-4 text-right font-semibold">от 6 100 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Фотополимерная реставрация (более 1/2)</td><td class="py-3 px-4 text-right font-semibold">от 6 400 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Протезирование -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/protezirovanie/" class="hover:text-[var(--color-brand)] transition-colors">Протезирование</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Временная коронка</td><td class="py-3 px-4 text-right font-semibold">1 100 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Металлокерамика (класс B)</td><td class="py-3 px-4 text-right font-semibold">9 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Металлокерамика (класс A)</td><td class="py-3 px-4 text-right font-semibold">12 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Диоксид циркония (ZrO₂)</td><td class="py-3 px-4 text-right font-semibold">19 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Безметалловая E-max</td><td class="py-3 px-4 text-right font-semibold">21 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Частичный протез (1–3 зуба)</td><td class="py-3 px-4 text-right font-semibold">12 600 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Частичный протез (4–9 зубов)</td><td class="py-3 px-4 text-right font-semibold">20 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Полный протез (10–14 зубов)</td><td class="py-3 px-4 text-right font-semibold">28 400 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Бюгельный односторонний</td><td class="py-3 px-4 text-right font-semibold">31 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Бюгельный двусторонний</td><td class="py-3 px-4 text-right font-semibold">33 600 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Имплантация -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/implantaciya/" class="hover:text-[var(--color-brand)] transition-colors">Имплантация</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Any One / Super Line</td><td class="py-3 px-4 text-right font-semibold">36 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Nobel / Straumann / Astra Tech</td><td class="py-3 px-4 text-right font-semibold">63 000 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Ортодонтия -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/ortodontiya/" class="hover:text-[var(--color-brand)] transition-colors">Ортодонтия</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Лигатурные брекеты (2 челюсти)</td><td class="py-3 px-4 text-right font-semibold">47 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Безлигатурные брекеты (2 челюсти)</td><td class="py-3 px-4 text-right font-semibold">94 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Элайнеры SS IQ (до 10 шагов)</td><td class="py-3 px-4 text-right font-semibold">105 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Элайнеры SS IQ (до 20 шагов)</td><td class="py-3 px-4 text-right font-semibold">157 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Элайнеры SS IQ (до 36 шагов)</td><td class="py-3 px-4 text-right font-semibold">204 500 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Элайнеры Kinder (до 7 шагов)</td><td class="py-3 px-4 text-right font-semibold">84 000 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Гигиена -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/gigiena-i-otbelivanie/" class="hover:text-[var(--color-brand)] transition-colors">Гигиена</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Подбор средств гигиены</td><td class="py-3 px-4 text-right font-semibold">350 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Чистка циркулярными щётками</td><td class="py-3 px-4 text-right font-semibold">4 200 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Чистка Air Flow</td><td class="py-3 px-4 text-right font-semibold">5 300 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Комплексная (УЗ + Air Flow + реминерализация)</td><td class="py-3 px-4 text-right font-semibold">6 300 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Хирургия -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/hirurgiya/" class="hover:text-[var(--color-brand)] transition-colors">Хирургия</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Удаление временного зуба</td><td class="py-3 px-4 text-right font-semibold">1 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Удаление подвижного зуба</td><td class="py-3 px-4 text-right font-semibold">1 000 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Удаление постоянного зуба</td><td class="py-3 px-4 text-right font-semibold">1 700 ₽</td></tr>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Сложное удаление</td><td class="py-3 px-4 text-right font-semibold">3 500 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Диагностика -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/diagnostika/" class="hover:text-[var(--color-brand)] transition-colors">Диагностика</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">КЛКТ (полная, без суставов)</td><td class="py-3 px-4 text-right font-semibold">3 100 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Пародонтология -->
+      <div class="mb-10">
+        <h2 class="text-xl font-bold mb-4"><a href="/uslugi/parodontologiya/" class="hover:text-[var(--color-brand)] transition-colors">Пародонтология</a></h2>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead><tr class="border-b border-[var(--border)]"><th class="text-left py-3 px-4 text-sm font-semibold">Услуга</th><th class="text-right py-3 px-4 text-sm font-semibold">Стоимость</th></tr></thead>
+            <tbody>
+              <tr class="border-b border-[var(--border)]"><td class="py-3 px-4">Первичный приём пародонтолога</td><td class="py-3 px-4 text-right font-semibold">1 500 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <p class="text-sm text-[var(--text-muted)] mt-10">
+        Указаны ориентировочные цены. Точную стоимость лечения врач определит после осмотра и диагностики.
+        Полный прайс-лист доступен в клинике.
+      </p>
+
+      <div class="mt-8 text-center">
+        <a href="/kontakty/#zapis" class="btn-cta">Записаться на приём</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
