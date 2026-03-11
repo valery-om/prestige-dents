@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const doctors = (await getCollection('doctors')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Врачи стоматологии Престиж в Магнитогорске"
+  description="Команда стоматологии Престиж: 14 врачей с опытом от 4 до 32 лет. Терапевты, хирурги, ортопед, ортодонт, гигиенисты."
+  breadcrumbs={[{ name: 'Врачи', url: 'https://prestige-dents.ru/vrachi/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'Врачи', url: '/vrachi/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Наши врачи</h1>
+      <p class="text-lg text-[var(--text-muted)] mb-10 max-w-2xl">
+        Команда из 14 специалистов с опытом от 4 до 32 лет. Двое врачей прошли стажировку в Израиле.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {doctors.map(doctor => (
+          <a href={`/vrachi/${doctor.data.slug}/`} class="glass-card block group">
+            <div class="w-full aspect-[3/4] rounded-lg mb-4 overflow-hidden bg-[var(--bg-alt)]">
+              {doctor.data.photo ? (
+                <img
+                  src={doctor.data.photo}
+                  alt={doctor.data.name}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
+                  <svg class="w-16 h-16 opacity-30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+            <h2 class="text-base font-semibold group-hover:text-[var(--color-brand)] transition-colors">
+              {doctor.data.name}
+            </h2>
+            <p class="text-sm text-[var(--color-brand)] mt-1">{doctor.data.specialty}</p>
+            {doctor.data.experience && (
+              <p class="text-sm text-[var(--text-muted)] mt-1">Опыт: {doctor.data.experience}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
