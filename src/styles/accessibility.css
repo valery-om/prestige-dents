@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════════
+   ACCESSIBILITY MODE — "Версия для слабовидящих"
+   Legal requirement for medical websites in Russia
+   Overrides both light and dark themes
+   ═══════════════════════════════════════════════ */
+
+:root[data-theme="accessible"] {
+  --text: #000000;
+  --text-muted: #333333;
+  --bg: #ffffff;
+  --bg-alt: #f0f0f0;
+  --border: #000000;
+  --glass: rgba(255, 255, 255, 1);
+  --glass-border: #000000;
+  --glass-shadow: none;
+}
+
+:root[data-theme="accessible"] body {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+:root[data-theme="accessible"] h1,
+:root[data-theme="accessible"] h2,
+:root[data-theme="accessible"] h3 {
+  letter-spacing: 0;
+}
+
+:root[data-theme="accessible"] .glass-card {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--bg);
+  border: 2px solid #000000;
+  box-shadow: none;
+}
+
+:root[data-theme="accessible"] .glass-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+:root[data-theme="accessible"] .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+:root[data-theme="accessible"] * {
+  animation: none !important;
+  transition-duration: 0s !important;
+}
+
+/* Focus indicators — always visible in accessible mode */
+:root[data-theme="accessible"] a:focus,
+:root[data-theme="accessible"] button:focus,
+:root[data-theme="accessible"] input:focus,
+:root[data-theme="accessible"] select:focus,
+:root[data-theme="accessible"] textarea:focus {
+  outline: 3px solid #000000;
+  outline-offset: 2px;
+}

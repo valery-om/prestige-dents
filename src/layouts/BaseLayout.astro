@@ -1,0 +1,105 @@
+---
+import '../styles/global.css';
+import '../styles/accessibility.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import clinic from '../data/clinic.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  noIndex?: boolean;
+}
+
+const {
+  title = `${clinic.name} — ${clinic.slogan}`,
+  description = `${clinic.name} в ${clinic.address.city}. Современная стоматология с AI-диагностикой для всей семьи.`,
+  breadcrumbs,
+  noIndex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={clinic.name} />
+
+    <title>{title}</title>
+    <slot name="head" />
+
+    <!-- Theme initialization (inline, no FOUC) -->
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('prestige-theme');
+        if (saved) {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      })();
+    </script>
+
+    <SchemaMarkup
+      pageTitle={title}
+      pageDescription={description}
+      pageUrl={canonicalUrl.toString()}
+      breadcrumbs={breadcrumbs}
+    />
+
+    <!-- Yandex.Metrika -->
+    <script is:inline>
+      (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=88421113', 'ym');
+      ym(88421113, 'init', {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/88421113" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:p-2 focus:bg-brand focus:text-white focus:rounded">
+      Перейти к содержанию
+    </a>
+    <Nav />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Reveal animation observer -->
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          document.documentElement.getAttribute('data-theme') !== 'accessible') {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+      }
+    </script>
+  </body>
+</html>

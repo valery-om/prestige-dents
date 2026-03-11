@@ -1,0 +1,86 @@
+---
+import { footerNav } from '../data/navigation';
+import clinic from '../data/clinic.json';
+---
+
+<footer class="bg-[var(--bg-alt)] border-t border-[var(--border)] mt-auto">
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)] py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Logo + contacts -->
+      <div class="space-y-4">
+        <a href="/" class="inline-block">
+          <img src="/logo.svg" alt="Престиж" class="h-8 w-auto" />
+        </a>
+        <p class="text-sm text-[var(--text-muted)]">{clinic.slogan}</p>
+        <div class="space-y-2 text-sm">
+          <a href={`tel:${clinic.phoneRaw}`} class="block font-semibold text-[var(--text)] hover:text-[var(--color-brand)]">{clinic.phone}</a>
+          <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="block text-[var(--text-muted)] hover:text-[var(--color-brand)]">WhatsApp: {clinic.whatsapp}</a>
+          <a href={`mailto:${clinic.email}`} class="block text-[var(--text-muted)] hover:text-[var(--color-brand)]">{clinic.email}</a>
+        </div>
+        <div class="text-sm text-[var(--text-muted)]">
+          <p>{clinic.hours.weekdays}</p>
+          <p>{clinic.hours.weekends}</p>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Услуги</h3>
+        <ul class="space-y-2">
+          {footerNav.services.map(item => (
+            <li><a href={item.href} class="text-sm text-[var(--text-muted)] hover:text-[var(--color-brand)] transition-colors">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Информация</h3>
+        <ul class="space-y-2">
+          {footerNav.info.map(item => (
+            <li><a href={item.href} class="text-sm text-[var(--text-muted)] hover:text-[var(--color-brand)] transition-colors">{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Address + socials -->
+      <div class="space-y-4">
+        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Адрес</h3>
+        <p class="text-sm text-[var(--text-muted)]">{clinic.address.city}, {clinic.address.street}</p>
+        <p class="text-sm text-[var(--text-muted)]">{clinic.address.district}</p>
+
+        <!-- Socials -->
+        <div class="flex gap-3 pt-2">
+          <a href={clinic.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
+            <span class="text-xs font-bold">VK</span>
+          </a>
+          <a href={clinic.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
+            <span class="text-xs font-bold">IG</span>
+          </a>
+          <a href={clinic.socials.ok} target="_blank" rel="noopener" aria-label="Одноклассники" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
+            <span class="text-xs font-bold">OK</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <hr class="divider my-8" />
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[var(--text-muted)]">
+      <div class="space-y-1 text-center md:text-left">
+        <p>{clinic.legalName}, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</p>
+        <p>Лицензия {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</p>
+      </div>
+      <div class="flex gap-4">
+        {footerNav.legal.map(item => (
+          <a href={item.href} class="hover:text-[var(--color-brand)] transition-colors">{item.label}</a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Medical disclaimer -->
+    <p class="mt-6 text-[10px] text-[var(--text-muted)] leading-relaxed max-w-3xl">
+      Информация на сайте не является публичной офертой. Имеются противопоказания, необходима консультация специалиста. Результаты лечения индивидуальны.
+    </p>
+  </div>
+</footer>

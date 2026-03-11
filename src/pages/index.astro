@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import clinic from '../data/clinic.json';
+---
+
+<BaseLayout>
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto text-center space-y-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+        {clinic.name}
+      </h1>
+      <p class="text-xl text-[var(--text-muted)] max-w-2xl mx-auto">
+        {clinic.slogan}
+      </p>
+      <div class="flex justify-center gap-4 pt-4">
+        <a href="/uslugi/" class="btn-brand">Наши услуги</a>
+        <a href="/kontakty/#zapis" class="btn-cta">Записаться</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Placeholder sections for Phase 3 -->
+  <section class="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--bg-alt)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h2 class="text-2xl font-bold mb-8">Услуги</h2>
+      <p class="text-[var(--text-muted)]">Контент услуг будет добавлен в Phase 3.</p>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h2 class="text-2xl font-bold mb-8">Наши врачи</h2>
+      <p class="text-[var(--text-muted)]">Контент врачей будет добавлен в Phase 3.</p>
+    </div>
+  </section>
+</BaseLayout>
