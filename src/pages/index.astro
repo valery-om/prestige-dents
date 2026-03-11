@@ -1,17 +1,16 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto text-center space-y-6">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold">
+        Placeholder — Phase 2
+      </h1>
+      <p class="text-xl text-[var(--text-muted)]">
+        Layout test. Homepage content in Phase 3.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

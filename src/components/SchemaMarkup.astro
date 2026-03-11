@@ -1,0 +1,80 @@
+---
+import clinic from '../data/clinic.json';
+
+interface Props {
+  pageTitle?: string;
+  pageDescription?: string;
+  pageUrl?: string;
+  breadcrumbs?: { name: string; url: string }[];
+}
+
+const { pageTitle, pageDescription, pageUrl, breadcrumbs } = Astro.props;
+
+const dentistSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Dentist", "MedicalBusiness"],
+  "@id": `${clinic.socials.vk}#organization`,
+  "name": clinic.name,
+  "legalName": clinic.legalName,
+  "url": "https://prestige-dents.ru",
+  "logo": "https://prestige-dents.ru/logo.svg",
+  "image": "https://prestige-dents.ru/og-image.jpg",
+  "description": `${clinic.name} — ${clinic.slogan}. Современная стоматология в ${clinic.address.city}.`,
+  "telephone": clinic.phoneRaw,
+  "email": clinic.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": clinic.address.street,
+    "addressLocality": clinic.address.city,
+    "addressRegion": clinic.address.region,
+    "postalCode": clinic.address.postalCode,
+    "addressCountry": clinic.address.country,
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": clinic.geo.latitude,
+    "longitude": clinic.geo.longitude,
+  },
+  "openingHoursSpecification": clinic.hours.schema.map(h => ({
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": h.days,
+    "opens": h.opens,
+    "closes": h.closes,
+  })),
+  "medicalSpecialty": [
+    "Orthodontics",
+    "PediatricDentistry",
+    "Prosthodontics",
+    "Endodontics",
+    "Periodontics",
+    "OralSurgery",
+  ],
+  "sameAs": Object.values(clinic.socials),
+  "priceRange": "₽₽",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": clinic.name,
+  "url": "https://prestige-dents.ru",
+  "inLanguage": "ru",
+};
+
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((item, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": item.name,
+    "item": item.url,
+  })),
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(dentistSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}
