@@ -2,9 +2,11 @@
 @import './fonts.css';
 
 /* ═══════════════════════════════════════════════
-   DESIGN SYSTEM — Glass Medical Tech
+   DESIGN SYSTEM — Clean Medical
    Brand: Стоматология Престиж
    Font: Inter (variable, self-hosted)
+   Style: Clean, minimal, lots of whitespace
+   Reference: prestige-dents.ru (Tilda)
    ═══════════════════════════════════════════════ */
 
 @theme {
@@ -12,36 +14,28 @@
   --color-brand: #3CA4CB;
   --color-brand-dark: #1F7B9C;
   --color-brand-light: #66C0CC;
-  --color-brand-pale: #e8f6fa;
+  --color-brand-pale: #eaf6fb;
   --color-accent: #DA5A5B;
   --color-accent-dark: #c44e4f;
-  --radius-glass: 16px;
-  --width-content: 1280px;
+  --width-content: 1200px;
 }
 
 :root {
-  /* Semantic tokens — Light theme */
-  --text: #1a1a2e;
-  --text-muted: #6b7280;
+  --text: #1a1a1a;
+  --text-muted: #565656;
   --bg: #ffffff;
-  --bg-alt: #f8fafb;
-  --border: rgba(60, 164, 203, 0.12);
+  --bg-alt: #f7fbfd;
+  --border: #e5e7eb;
 
-  /* Glassmorphism */
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(60, 164, 203, 0.15);
-  --glass-shadow: 0 8px 32px rgba(60, 164, 203, 0.08);
+  /* Cards */
+  --card-bg: #ffffff;
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.10);
+  --card-radius: 20px;
 
-  /* Spacing scale (8px base) */
-  --space-xs: 0.5rem;
-  --space-s: 1rem;
-  --space-m: 2rem;
-  --space-l: 4rem;
-  --space-xl: 8rem;
-
-  /* Section padding */
-  --section-py: clamp(2.5rem, 6vh, 5rem);
-  --section-px: clamp(1.25rem, 4vw, 4rem);
+  /* Section spacing — generous like Tilda */
+  --section-py: clamp(5rem, 12vh, 7rem);
+  --section-px: clamp(1.25rem, 4vw, 2rem);
 }
 
 /* ═══ Dark theme ═══ */
@@ -50,25 +44,22 @@
   --text-muted: #94a3b8;
   --bg: #0f172a;
   --bg-alt: #1e293b;
-  --border: rgba(60, 164, 203, 0.2);
-
-  --glass: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(60, 164, 203, 0.25);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --border: #334155;
+  --card-bg: #1e293b;
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ═══ System dark preference ═══ */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]):not([data-theme="accessible"]) {
     --text: #f1f5f9;
     --text-muted: #94a3b8;
     --bg: #0f172a;
     --bg-alt: #1e293b;
-    --border: rgba(60, 164, 203, 0.2);
-
-    --glass: rgba(30, 41, 59, 0.7);
-    --glass-border: rgba(60, 164, 203, 0.25);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --border: #334155;
+    --card-bg: #1e293b;
+    --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -87,7 +78,7 @@ html {
 body {
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 400;
-  font-size: clamp(0.9375rem, 0.875rem + 0.25vw, 1.0625rem);
+  font-size: 16px;
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -99,15 +90,15 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   color: var(--text);
 }
 
 a {
   color: var(--color-brand);
   text-decoration: none;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 a:hover {
   color: var(--color-brand-dark);
@@ -118,86 +109,96 @@ img {
   display: block;
 }
 
-/* ═══ Glass card ═══ */
-.glass-card {
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--glass-shadow);
-  transition: all 0.25s ease;
+/* ═══ Card — clean white with subtle shadow ═══ */
+.card {
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.glass-card:hover {
-  border-color: var(--color-brand);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(60, 164, 203, 0.15);
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
 }
 
-/* ═══ CTA button ═══ */
+/* Keep glass-card as alias for compatibility */
+.glass-card {
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ═══ Buttons ═══ */
 .btn-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.875rem 2rem;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   background: var(--color-accent);
   color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
 }
 .btn-cta:hover {
   background: var(--color-accent-dark);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(218, 90, 91, 0.3);
+  box-shadow: 0 6px 20px rgba(218, 90, 91, 0.3);
 }
 
-/* ═══ Brand button ═══ */
 .btn-brand {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.875rem 2rem;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   background: var(--color-brand);
   color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
 }
 .btn-brand:hover {
   background: var(--color-brand-dark);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(60, 164, 203, 0.3);
+  box-shadow: 0 6px 20px rgba(60, 164, 203, 0.3);
 }
 
-/* ═══ Outline button ═══ */
 .btn-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.75rem;
+  gap: 0.5rem;
+  padding: 0.875rem 2.25rem;
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   background: transparent;
   color: var(--color-brand);
   border: 2px solid var(--color-brand);
-  border-radius: 12px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
 }
 .btn-outline:hover {
@@ -209,16 +210,16 @@ img {
 .reveal {
   opacity: 0;
   transform: translateY(1.5rem);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-d1 { transition-delay: 0.08s; }
-.reveal-d2 { transition-delay: 0.16s; }
-.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
 
 /* ═══ Section divider ═══ */
 .divider {

@@ -3,21 +3,21 @@ import { footerNav } from '../data/navigation';
 import clinic from '../data/clinic.json';
 ---
 
-<footer class="bg-[var(--bg-alt)] border-t border-[var(--border)] mt-auto">
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)] py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<footer style="background: var(--bg-alt); border-top: 1px solid var(--border); margin-top: auto;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;">
       <!-- Logo + contacts -->
-      <div class="space-y-4">
-        <a href="/" class="inline-block">
-          <img src="/logo.svg" alt="Престиж" class="h-8 w-auto" />
+      <div>
+        <a href="/" style="display: inline-block; margin-bottom: 1rem;">
+          <img src="/logo.svg" alt="Престиж" style="height: 2rem; width: auto;" />
         </a>
-        <p class="text-sm text-[var(--text-muted)]">{clinic.slogan}</p>
-        <div class="space-y-2 text-sm">
-          <a href={`tel:${clinic.phoneRaw}`} class="block font-semibold text-[var(--text)] hover:text-[var(--color-brand)]">{clinic.phone}</a>
-          <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="block text-[var(--text-muted)] hover:text-[var(--color-brand)]">WhatsApp: {clinic.whatsapp}</a>
-          <a href={`mailto:${clinic.email}`} class="block text-[var(--text-muted)] hover:text-[var(--color-brand)]">{clinic.email}</a>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem;">{clinic.slogan}</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
+          <a href={`tel:${clinic.phoneRaw}`} style="font-weight: 600; color: var(--text); text-decoration: none;">{clinic.phone}</a>
+          <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none;">WhatsApp: {clinic.whatsapp}</a>
+          <a href={`mailto:${clinic.email}`} style="color: var(--text-muted); text-decoration: none;">{clinic.email}</a>
         </div>
-        <div class="text-sm text-[var(--text-muted)]">
+        <div style="font-size: 0.875rem; color: var(--text-muted); margin-top: 1rem;">
           <p>{clinic.hours.weekdays}</p>
           <p>{clinic.hours.weekends}</p>
         </div>
@@ -25,62 +25,81 @@ import clinic from '../data/clinic.json';
 
       <!-- Services -->
       <div>
-        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Услуги</h3>
-        <ul class="space-y-2">
+        <h3 style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 1.25rem;">Услуги</h3>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.625rem;">
           {footerNav.services.map(item => (
-            <li><a href={item.href} class="text-sm text-[var(--text-muted)] hover:text-[var(--color-brand)] transition-colors">{item.label}</a></li>
+            <li><a href={item.href} style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none;">{item.label}</a></li>
           ))}
         </ul>
       </div>
 
       <!-- Info -->
       <div>
-        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Информация</h3>
-        <ul class="space-y-2">
+        <h3 style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 1.25rem;">Информация</h3>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.625rem;">
           {footerNav.info.map(item => (
-            <li><a href={item.href} class="text-sm text-[var(--text-muted)] hover:text-[var(--color-brand)] transition-colors">{item.label}</a></li>
+            <li><a href={item.href} style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none;">{item.label}</a></li>
           ))}
         </ul>
       </div>
 
       <!-- Address + socials -->
-      <div class="space-y-4">
-        <h3 class="font-semibold text-sm text-[var(--text)] mb-4">Адрес</h3>
-        <p class="text-sm text-[var(--text-muted)]">{clinic.address.city}, {clinic.address.street}</p>
-        <p class="text-sm text-[var(--text-muted)]">{clinic.address.district}</p>
+      <div>
+        <h3 style="font-weight: 600; font-size: 0.875rem; color: var(--text); margin-bottom: 1.25rem;">Адрес</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.25rem;">{clinic.address.city}, {clinic.address.street}</p>
+        <p style="font-size: 0.875rem; color: var(--text-muted);">{clinic.address.district}</p>
 
         <!-- Socials -->
-        <div class="flex gap-3 pt-2">
-          <a href={clinic.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
-            <span class="text-xs font-bold">VK</span>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+          <a href={clinic.socials.vk} target="_blank" rel="noopener" aria-label="ВКонтакте" style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; color: var(--color-brand); text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;">
+              <path d="M12.77 19.15h1.27s.38-.04.58-.25c.18-.19.17-.55.17-.55s-.02-1.69.76-1.94c.77-.25 1.76 1.65 2.81 2.38.8.55 1.4.43 1.4.43l2.82-.04s1.47-.09.77-1.24c-.06-.09-.42-.84-2.15-2.38-1.81-1.62-1.57-1.36.61-4.16 1.33-1.7 1.86-2.74 1.69-3.18-.16-.42-1.13-.31-1.13-.31l-3.17.02s-.24-.03-.41.07c-.17.1-.28.33-.28.33s-.5 1.33-1.16 2.47c-1.4 2.41-1.96 2.54-2.19 2.39-.53-.35-.4-1.4-.4-2.14 0-2.33.35-3.3-.69-3.55-.35-.08-.6-.14-1.48-.15-.14 0-.94 0-1.49.3-.33.19-.58.48-.43.5.2.03.64.12.88.44.3.41.29 1.34.29 1.34s.17 2.74-.4 3.08c-.39.23-.93-.24-2.09-2.41-.59-1.11-1.04-2.34-1.04-2.34s-.09-.21-.24-.33c-.19-.14-.46-.19-.46-.19l-3.01.02s-.45.01-.62.21c-.15.17-.01.53-.01.53s2.33 5.45 4.97 8.2c2.42 2.52 5.17 2.35 5.17 2.35z"/>
+            </svg>
           </a>
-          <a href={clinic.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
-            <span class="text-xs font-bold">IG</span>
+          <a href={clinic.socials.instagram} target="_blank" rel="noopener" aria-label="Instagram" style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; color: var(--color-brand); text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
           </a>
-          <a href={clinic.socials.ok} target="_blank" rel="noopener" aria-label="Одноклассники" class="w-9 h-9 rounded-full bg-[var(--color-brand-pale)] flex items-center justify-center text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-white transition-colors">
-            <span class="text-xs font-bold">OK</span>
+          <a href={clinic.socials.ok} target="_blank" rel="noopener" aria-label="Одноклассники" style="width: 36px; height: 36px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; color: var(--color-brand); text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;">
+              <path d="M12 6.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM12 2a7 7 0 110 14 7 7 0 010-14zm0 3a4 4 0 100 8 4 4 0 000-8zm4.24 10.18a7.5 7.5 0 01-2.82 1.09l2.56 2.56a1.5 1.5 0 01-2.12 2.12L12 19.09l-1.86 1.86a1.5 1.5 0 01-2.12-2.12l2.56-2.56a7.5 7.5 0 01-2.82-1.09 1.5 1.5 0 011.72-2.46A4.5 4.5 0 0012 14.5a4.5 4.5 0 002.52-.78 1.5 1.5 0 011.72 2.46z"/>
+            </svg>
           </a>
         </div>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <hr class="divider my-8" />
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[var(--text-muted)]">
-      <div class="space-y-1 text-center md:text-left">
+    <hr style="border: none; border-top: 1px solid var(--border); margin: 2.5rem 0;" />
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--text-muted);">
+      <div>
         <p>{clinic.legalName}, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</p>
-        <p>Лицензия {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</p>
+        <p style="margin-top: 0.25rem;">Лицензия {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</p>
       </div>
-      <div class="flex gap-4">
+      <div style="display: flex; gap: 1.5rem;">
         {footerNav.legal.map(item => (
-          <a href={item.href} class="hover:text-[var(--color-brand)] transition-colors">{item.label}</a>
+          <a href={item.href} style="color: var(--text-muted); text-decoration: none;">{item.label}</a>
         ))}
       </div>
     </div>
 
     <!-- Medical disclaimer -->
-    <p class="mt-6 text-[10px] text-[var(--text-muted)] leading-relaxed max-w-3xl">
+    <p style="margin-top: 1.5rem; font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 56rem;">
       Информация на сайте не является публичной офертой. Имеются противопоказания, необходима консультация специалиста. Результаты лечения индивидуальны.
     </p>
   </div>
 </footer>
+
+<style is:inline>
+  @media (max-width: 1024px) {
+    footer > div > div:first-child {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (max-width: 640px) {
+    footer > div > div:first-child {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

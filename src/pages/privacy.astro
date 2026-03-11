@@ -9,13 +9,22 @@ import clinic from '../data/clinic.json';
   description="Политика обработки персональных данных стоматологии Престиж."
   breadcrumbs={[{ name: 'Политика конфиденциальности', url: 'https://prestige-dents.ru/privacy/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'Политика конфиденциальности', url: '/privacy/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[800px] mx-auto service-content">
-      <h1 class="text-3xl font-bold mb-6">Политика конфиденциальности</h1>
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        Политика конфиденциальности
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+    </div>
+  </section>
+
+  <section style="padding: 80px 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;" class="service-content">
 
       <h2>1. Общие положения</h2>
       <p>{clinic.legalName} (ИНН {clinic.inn}, далее — «Оператор») обрабатывает персональные данные посетителей сайта prestige-dents.ru (далее — «Сайт») в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>

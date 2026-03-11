@@ -13,10 +13,14 @@ const allItems = [{ name: 'Главная', url: '/' }, ...items];
 ---
 
 <nav aria-label="Хлебные крошки" class="text-sm text-[var(--text-muted)] py-3">
-  <ol class="flex flex-wrap items-center gap-1">
+  <ol class="flex flex-wrap items-center gap-1.5">
     {allItems.map((item, i) => (
       <li class="flex items-center">
-        {i > 0 && <span class="mx-1">/</span>}
+        {i > 0 && (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 mx-1.5 opacity-40">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        )}
         {i < allItems.length - 1 ? (
           <a href={item.url} class="hover:text-[var(--color-brand)] transition-colors">{item.name}</a>
         ) : (

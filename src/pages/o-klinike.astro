@@ -9,44 +9,81 @@ import clinic from '../data/clinic.json';
   description={`${clinic.name} в ${clinic.address.city}. Семейная стоматология с 2008 года. AI-диагностика, 19 единиц импортного оборудования, врачи с международным опытом.`}
   breadcrumbs={[{ name: 'О клинике', url: 'https://prestige-dents.ru/o-klinike/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'О клинике', url: '/o-klinike/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[800px] mx-auto service-content">
-      <h1 class="text-3xl md:text-4xl font-bold mb-6">О клинике</h1>
-
-      <p class="text-lg text-[var(--text-muted)] mb-8">
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        О клинике
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 1rem;">
         Семейная стоматология «Престиж» работает в Магнитогорске с 2008 года. За это время мы стали клиникой, которой доверяют семьи — рейтинг 4.9 в 2ГИС, более 270 отзывов.
       </p>
+    </div>
+  </section>
 
-      <h2>Наш подход</h2>
-      <p><strong>«Ваша улыбка — наш престиж»</strong> — не просто слоган. Мы совмещаем высокие технологии с человеческой заботой: от безболезненной анестезии гелем до AI-диагностики.</p>
+  <section style="padding: 80px 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
 
-      <h2>Технологии</h2>
-      <ul>
-        <li><strong>AI-диагностика Diagnocat</strong> — анализ КЛКТ-снимков искусственным интеллектом для точного планирования лечения</li>
-        <li><strong>DianApp</strong> — оценка гигиены полости рта по фотографии</li>
-        <li><strong>Компьютерная томография (КЛКТ)</strong> — 3D-снимок всей челюсти за 15 секунд</li>
-        <li><strong>19 единиц импортного оборудования</strong> — Sirona, W&H, Dentsply, Hu-Friedy</li>
-      </ul>
+      <!-- Подход -->
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Наш подход</h2>
+        <p>
+          <strong>«Ваша улыбка — наш престиж»</strong> — не просто слоган. Мы совмещаем высокие технологии с человеческой заботой: от безболезненной анестезии гелем до AI-диагностики.
+        </p>
+      </div>
 
-      <h2>Команда</h2>
-      <p>14 врачей с опытом от 4 до 32 лет. Двое специалистов прошли стажировку в Израиле. Регулярное повышение квалификации на курсах и конгрессах.</p>
-      <p><a href="/vrachi/" class="text-[var(--color-brand)] font-semibold">Познакомьтесь с нашими врачами →</a></p>
+      <!-- Технологии -->
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Технологии</h2>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+          <li style="display: flex; gap: 0.75rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--color-brand);"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>AI-диагностика Diagnocat</strong> — анализ КЛКТ-снимков искусственным интеллектом для точного планирования лечения</span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--color-brand);"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>DianApp</strong> — оценка гигиены полости рта по фотографии</span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--color-brand);"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>Компьютерная томография (КЛКТ)</strong> — 3D-снимок всей челюсти за 15 секунд</span>
+          </li>
+          <li style="display: flex; gap: 0.75rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--color-brand);"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>19 единиц импортного оборудования</strong> — Sirona, W&H, Dentsply, Hu-Friedy</span>
+          </li>
+        </ul>
+      </div>
 
-      <h2>Для всей семьи</h2>
-      <p>Мы лечим пациентов любого возраста — от детей до людей старшего поколения. Терапия, протезирование, имплантация, ортодонтия, гигиена, хирургия, диагностика.</p>
+      <!-- Команда -->
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Команда</h2>
+        <p style="margin-bottom: 0.75rem;">14 врачей с опытом от 4 до 32 лет. Двое специалистов прошли стажировку в Израиле. Регулярное повышение квалификации на курсах и конгрессах.</p>
+        <a href="/vrachi/" style="color: var(--color-brand); font-weight: 600;">Познакомьтесь с нашими врачами &rarr;</a>
+      </div>
 
-      <h2>Реквизиты</h2>
-      <ul>
-        <li>{clinic.legalName}, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</li>
-        <li>Лицензия: {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</li>
-        <li>Выдана: {clinic.license.authority}</li>
-      </ul>
+      <!-- Для всей семьи -->
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Для всей семьи</h2>
+        <p>Мы лечим пациентов любого возраста — от детей до людей старшего поколения. Терапия, протезирование, имплантация, ортодонтия, гигиена, хирургия, диагностика.</p>
+      </div>
 
-      <div class="mt-10 text-center">
+      <!-- Реквизиты -->
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Реквизиты</h2>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--text-muted);">
+          <li>{clinic.legalName}, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</li>
+          <li>Лицензия: {clinic.license.number} от {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</li>
+          <li>Выдана: {clinic.license.authority}</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center;">
         <a href="/kontakty/#zapis" class="btn-cta">Записаться на приём</a>
       </div>
     </div>

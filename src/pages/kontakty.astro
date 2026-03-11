@@ -2,6 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import clinic from '../data/clinic.json';
+
+const iconMapPin = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex-shrink: 0; color: var(--color-brand);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+const iconPhone = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex-shrink: 0; color: var(--color-brand);"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>';
+const iconChat = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex-shrink: 0; color: var(--color-brand);"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>';
+const iconEnvelope = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex-shrink: 0; color: var(--color-brand);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>';
+const iconClock = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex-shrink: 0; color: var(--color-brand);"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
 ---
 
 <BaseLayout
@@ -9,40 +15,63 @@ import clinic from '../data/clinic.json';
   description={`Адрес, телефон, график работы стоматологии Престиж в Магнитогорске. ${clinic.address.street}. Записаться: ${clinic.phone}.`}
   breadcrumbs={[{ name: 'Контакты', url: 'https://prestige-dents.ru/kontakty/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'Контакты', url: '/kontakty/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[1280px] mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8">Контакты</h1>
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        Контакты
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+    </div>
+  </section>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+  <section style="padding: 80px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="contacts-grid">
         <!-- Contact info -->
-        <div class="space-y-6">
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
           <div class="glass-card">
-            <h2 class="font-semibold mb-3">Адрес</h2>
-            <p class="text-[var(--text)]">{clinic.address.city}, {clinic.address.street}</p>
-            <p class="text-sm text-[var(--text-muted)]">{clinic.address.district}</p>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <Fragment set:html={iconMapPin} />
+              <h2 style="font-weight: 600;">Адрес</h2>
+            </div>
+            <p>{clinic.address.city}, {clinic.address.street}</p>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">{clinic.address.district}</p>
           </div>
 
           <div class="glass-card">
-            <h2 class="font-semibold mb-3">Телефон</h2>
-            <a href={`tel:${clinic.phoneRaw}`} class="text-xl font-bold text-[var(--color-brand)]">{clinic.phone}</a>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <Fragment set:html={iconPhone} />
+              <h2 style="font-weight: 600;">Телефон</h2>
+            </div>
+            <a href={`tel:${clinic.phoneRaw}`} style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand);">{clinic.phone}</a>
           </div>
 
           <div class="glass-card">
-            <h2 class="font-semibold mb-3">WhatsApp</h2>
-            <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="text-lg font-semibold text-[#25D366]">{clinic.whatsapp}</a>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <Fragment set:html={iconChat} />
+              <h2 style="font-weight: 600;">WhatsApp</h2>
+            </div>
+            <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" style="font-size: 1.125rem; font-weight: 600; color: #25D366;">{clinic.whatsapp}</a>
           </div>
 
           <div class="glass-card">
-            <h2 class="font-semibold mb-3">Email</h2>
-            <a href={`mailto:${clinic.email}`} class="text-[var(--color-brand)]">{clinic.email}</a>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <Fragment set:html={iconEnvelope} />
+              <h2 style="font-weight: 600;">Email</h2>
+            </div>
+            <a href={`mailto:${clinic.email}`} style="color: var(--color-brand);">{clinic.email}</a>
           </div>
 
           <div class="glass-card">
-            <h2 class="font-semibold mb-3">График работы</h2>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+              <Fragment set:html={iconClock} />
+              <h2 style="font-weight: 600;">График работы</h2>
+            </div>
             <p>{clinic.hours.weekdays}</p>
             <p>{clinic.hours.weekends}</p>
           </div>
@@ -50,7 +79,7 @@ import clinic from '../data/clinic.json';
 
         <!-- Map -->
         <div>
-          <div class="rounded-xl overflow-hidden h-[400px] bg-[var(--bg-alt)]">
+          <div style="border-radius: 16px; overflow: hidden; height: 400px; background: var(--bg-alt);">
             <iframe
               src={`https://yandex.ru/map-widget/v1/?ll=${clinic.geo.longitude}%2C${clinic.geo.latitude}&z=16&pt=${clinic.geo.longitude}%2C${clinic.geo.latitude}%2Cpm2rdm`}
               width="100%"
@@ -64,16 +93,29 @@ import clinic from '../data/clinic.json';
       </div>
 
       <!-- Appointment section -->
-      <div id="zapis" class="mt-16 text-center">
-        <h2 class="text-2xl font-bold mb-4">Записаться на приём</h2>
-        <p class="text-[var(--text-muted)] mb-6 max-w-lg mx-auto">
+      <div id="zapis" style="margin-top: 4rem; text-align: center;">
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Записаться на приём</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 32rem; margin-left: auto; margin-right: auto;">
           Позвоните нам или напишите в WhatsApp — администратор подберёт удобное время.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
           <a href={`tel:${clinic.phoneRaw}`} class="btn-brand">Позвонить</a>
           <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="btn-cta">Написать в WhatsApp</a>
         </div>
       </div>
     </div>
   </section>
+
+  <style is:inline>
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    @media (max-width: 768px) {
+      .contacts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </BaseLayout>

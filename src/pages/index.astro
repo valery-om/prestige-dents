@@ -7,66 +7,106 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 const doctors = (await getCollection('doctors'))
   .filter(d => d.data.order <= 10)
   .sort((a, b) => a.data.order - b.data.order);
+
+const serviceDescriptions: Record<string, string> = {
+  terapiya: 'Лечение кариеса и пульпита. Безболезненная анестезия гелем.',
+  protezirovanie: 'Коронки, виниры, съёмные протезы. Металлокерамика и цирконий.',
+  implantaciya: 'Немецкие и швейцарские системы. AI-планирование лечения.',
+  ortodontiya: 'Брекеты и прозрачные элайнеры для детей и взрослых.',
+  'gigiena-i-otbelivanie': 'Air Flow, ультразвук, реминерализация.',
+  hirurgiya: 'Простое и сложное удаление. Безболезненно.',
+  diagnostika: '3D-снимки (КЛКТ) с AI-анализом Diagnocat.',
+  parodontologiya: 'Лечение дёсен: пародонтит, гингивит.',
+  'detskaya-stomatologiya': 'Молочные зубы, цветные пломбы. Без страха.',
+};
+
+function getInitials(name: string): string {
+  const parts = name.split(' ');
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return parts[0][0].toUpperCase();
+}
 ---
 
 <BaseLayout>
-  <!-- Hero -->
-  <section class="py-[var(--section-py)] px-[var(--section-px)] relative overflow-hidden">
-    <div class="max-w-[1280px] mx-auto text-center space-y-6 relative z-10">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold reveal">
-        {clinic.name}
+
+  <!-- ===== HERO ===== -->
+  <section style="background: linear-gradient(135deg, #3CA4CB 0%, #2a8fb5 100%); padding: 100px 0 120px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+      <h1 style="font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; margin-bottom: 1.25rem; line-height: 1.2;">
+        Семейная стоматология<br/>в Магнитогорске
       </h1>
-      <p class="text-xl md:text-2xl text-[var(--text-muted)] max-w-2xl mx-auto reveal reveal-d1">
-        {clinic.slogan}
+      <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; font-weight: 400;">
+        Ваша улыбка — наш престиж
       </p>
-      <p class="text-lg text-[var(--text-muted)] max-w-xl mx-auto reveal reveal-d2">
-        Современная стоматология с AI-диагностикой для всей семьи в Магнитогорске
-      </p>
-      <div class="flex flex-wrap justify-center gap-4 pt-4 reveal reveal-d3">
-        <a href="/uslugi/" class="btn-brand">Наши услуги</a>
-        <a href="/kontakty/#zapis" class="btn-cta">Записаться</a>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/kontakty/#zapis" class="btn-cta" style="padding: 1rem 3rem; font-size: 1.1rem;">
+          Записаться на приём
+        </a>
+        <a href={`tel:${clinic.phoneRaw}`} style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: rgba(255,255,255,0.15); color: #fff; font-weight: 500; font-size: 1.1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.3); transition: all 0.2s; text-decoration: none;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          {clinic.phone}
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- USP -->
-  <section class="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--bg-alt)]">
-    <div class="max-w-[1280px] mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="glass-card text-center reveal">
-          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">4.9</div>
-          <p class="text-sm text-[var(--text-muted)]">Рейтинг в 2ГИС — лучший в городе</p>
+  <!-- ===== USP STATS ===== -->
+  <section style="padding: 80px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--color-brand)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-brand); margin-bottom: 0.5rem;">4.9</div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Рейтинг в 2ГИС —<br/>лучший в городе</p>
         </div>
-        <div class="glass-card text-center reveal reveal-d1">
-          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">AI</div>
-          <p class="text-sm text-[var(--text-muted)]">Diagnocat + DianApp — AI-диагностика</p>
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><circle cx="15" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><path d="M9 15c1 1.5 5 1.5 6 0"/></svg>
+          </div>
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-brand); margin-bottom: 0.5rem;">AI</div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Diagnocat + DianApp<br/>AI-диагностика</p>
         </div>
-        <div class="glass-card text-center reveal reveal-d2">
-          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">14</div>
-          <p class="text-sm text-[var(--text-muted)]">Врачей, включая стажировки в Израиле</p>
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2"/><path d="M17 10a5 5 0 013 4.5V21"/></svg>
+          </div>
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-brand); margin-bottom: 0.5rem;">14</div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Врачей с опытом<br/>до 32 лет</p>
         </div>
-        <div class="glass-card text-center reveal reveal-d3">
-          <div class="text-3xl font-bold text-[var(--color-brand)] mb-2">0</div>
-          <p class="text-sm text-[var(--text-muted)]">Боли — безболезненная анестезия гелем</p>
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/><path d="M9 12l2 2 4-4" stroke-width="2"/></svg>
+          </div>
+          <div style="font-size: 2.5rem; font-weight: 700; color: var(--color-brand); margin-bottom: 0.5rem;">0</div>
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;">Боли — анестезия<br/>гелем без уколов</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[1280px] mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold mb-2 reveal">Услуги</h2>
-      <p class="text-[var(--text-muted)] mb-8 reveal reveal-d1">Полный спектр стоматологических услуг для всей семьи</p>
+  <!-- ===== SERVICES ===== -->
+  <section style="padding: 80px 0; background: var(--bg-alt);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Наши услуги</h2>
+      <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
+        Полный спектр стоматологической помощи для всей семьи
+      </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((service, i) => (
-          <a href={`/uslugi/${service.data.slug}/`} class={`glass-card block group reveal reveal-d${Math.min(i % 3 + 1, 3)}`}>
-            <h3 class="text-lg font-semibold mb-2 group-hover:text-[var(--color-brand)] transition-colors">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        {services.map((service) => (
+          <a href={`/uslugi/${service.data.slug}/`}
+            class="card"
+            style="display: block; text-decoration: none; color: inherit;">
+            <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">
               {service.data.title}
             </h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              {serviceDescriptions[service.data.slug] || ''}
+            </p>
             {service.data.priceFrom && (
-              <p class="text-sm font-semibold text-[var(--color-brand)]">
+              <p style="font-size: 0.95rem; font-weight: 600; color: var(--color-brand);">
                 от {service.data.priceFrom.toLocaleString('ru-RU')} ₽
               </p>
             )}
@@ -74,55 +114,117 @@ const doctors = (await getCollection('doctors'))
         ))}
       </div>
 
-      <div class="text-center mt-8 reveal">
-        <a href="/ceny/" class="btn-outline">Все цены</a>
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/ceny/" class="btn-outline">Полный прайс-лист</a>
       </div>
     </div>
   </section>
 
-  <!-- Doctors -->
-  <section class="py-[var(--section-py)] px-[var(--section-px)] bg-[var(--bg-alt)]">
-    <div class="max-w-[1280px] mx-auto">
-      <h2 class="text-2xl md:text-3xl font-bold mb-2 reveal">Наши врачи</h2>
-      <p class="text-[var(--text-muted)] mb-8 reveal reveal-d1">Команда из 14 специалистов с опытом от 4 до 32 лет</p>
+  <!-- ===== DOCTORS ===== -->
+  <section style="padding: 80px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Наши врачи</h2>
+      <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
+        Команда из 14 специалистов с опытом от 4 до 32 лет
+      </p>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {doctors.slice(0, 5).map((doctor, i) => (
-          <a href={`/vrachi/${doctor.data.slug}/`} class={`glass-card block group text-center reveal reveal-d${Math.min(i % 3 + 1, 3)}`}>
-            <div class="w-20 h-20 mx-auto rounded-full overflow-hidden bg-[var(--bg-alt)] mb-3">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;">
+        {doctors.slice(0, 8).map((doctor) => (
+          <a href={`/vrachi/${doctor.data.slug}/`} style="text-decoration: none; color: inherit; text-align: center; display: block;">
+            <div style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; border: 3px solid var(--color-brand-pale);">
               {doctor.data.photo ? (
-                <img src={doctor.data.photo} alt={doctor.data.name} class="w-full h-full object-cover" loading="lazy" />
+                <img src={doctor.data.photo} alt={doctor.data.name}
+                  style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
+                  loading="lazy" />
               ) : (
-                <div class="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
-                  <svg class="w-8 h-8 opacity-30" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3CA4CB, #1F7B9C); color: white; font-weight: 700; font-size: 2rem;">
+                  {getInitials(doctor.data.name)}
                 </div>
               )}
             </div>
-            <p class="text-sm font-semibold group-hover:text-[var(--color-brand)] transition-colors">{doctor.data.name.split(' ').slice(0, 2).join(' ')}</p>
-            <p class="text-xs text-[var(--text-muted)] mt-1">{doctor.data.specialty}</p>
+            <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem;">{doctor.data.name.split(' ').slice(0, 2).join(' ')}</p>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">{doctor.data.specialty}</p>
+            {doctor.data.experience && (
+              <p style="font-size: 0.8rem; color: var(--color-brand); margin-top: 0.25rem; font-weight: 500;">
+                Стаж: {doctor.data.experience}
+              </p>
+            )}
           </a>
         ))}
       </div>
 
-      <div class="text-center mt-8 reveal">
+      <div style="text-align: center; margin-top: 3rem;">
         <a href="/vrachi/" class="btn-outline">Все врачи</a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[800px] mx-auto text-center reveal">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">Запишитесь на приём</h2>
-      <p class="text-lg text-[var(--text-muted)] mb-6">
-        Позвоните или напишите в WhatsApp — администратор подберёт удобное время.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href={`tel:${clinic.phoneRaw}`} class="btn-brand">{clinic.phone}</a>
-        <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" class="btn-cta">Написать в WhatsApp</a>
+  <!-- ===== WHY US ===== -->
+  <section style="padding: 80px 0; background: var(--bg-alt);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 4rem;">Почему выбирают нас</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;">
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><circle cx="15" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><path d="M9 15c1 1.5 5 1.5 6 0"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">AI-диагностика</h3>
+            <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">Diagnocat анализирует 3D-снимки за 5 минут. DianApp оценивает гигиену по фото.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">Без боли и страха</h3>
+            <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">Анестезия гелем — без уколов. Единственная клиника в Магнитогорске с такой технологией.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">Международный опыт</h3>
+            <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">Два врача прошли стажировку в ведущих клиниках Израиля.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+          <div style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">Для всей семьи</h3>
+            <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">От детской стоматологии до протезирования. Один врач ведёт всю семью.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- ===== CTA ===== -->
+  <section style="padding: 80px 0; background: linear-gradient(135deg, #3CA4CB 0%, #2a8fb5 100%);">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+      <h2 style="font-size: clamp(1.75rem, 4vw, 2.25rem); color: #fff; margin-bottom: 1rem;">Запишитесь на приём</h2>
+      <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem;">
+        Позвоните или напишите в WhatsApp — администратор подберёт удобное время
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href={`tel:${clinic.phoneRaw}`}
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: #fff; color: var(--color-brand-dark); font-weight: 600; font-size: 1.1rem; border-radius: 50px; text-decoration: none; transition: all 0.2s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          {clinic.phone}
+        </a>
+        <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: #25D366; color: #fff; font-weight: 600; font-size: 1.1rem; border-radius: 50px; text-decoration: none; transition: all 0.2s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>

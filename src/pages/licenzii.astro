@@ -9,24 +9,32 @@ import clinic from '../data/clinic.json';
   description={`Лицензия на осуществление медицинской деятельности ${clinic.license.number}. Сертификаты врачей стоматологии Престиж.`}
   breadcrumbs={[{ name: 'Лицензии', url: 'https://prestige-dents.ru/licenzii/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'Лицензии', url: '/licenzii/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[800px] mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-6">Лицензии и сертификаты</h1>
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        Лицензии и сертификаты
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+    </div>
+  </section>
 
-      <div class="glass-card mb-8">
-        <h2 class="text-lg font-semibold mb-3">Лицензия на медицинскую деятельность</h2>
-        <p><strong>Номер:</strong> {clinic.license.number}</p>
-        <p><strong>Дата выдачи:</strong> {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</p>
-        <p><strong>Выдана:</strong> {clinic.license.authority}</p>
-        <p><strong>Статус:</strong> действующая</p>
-        <p class="mt-3"><strong>{clinic.legalName}</strong>, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</p>
+  <section style="padding: 80px 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem;">Лицензия на медицинскую деятельность</h2>
+        <p style="margin-bottom: 0.25rem;"><strong>Номер:</strong> {clinic.license.number}</p>
+        <p style="margin-bottom: 0.25rem;"><strong>Дата выдачи:</strong> {new Date(clinic.license.date).toLocaleDateString('ru-RU')}</p>
+        <p style="margin-bottom: 0.25rem;"><strong>Выдана:</strong> {clinic.license.authority}</p>
+        <p style="margin-bottom: 0.25rem;"><strong>Статус:</strong> действующая</p>
+        <p style="margin-top: 0.75rem;"><strong>{clinic.legalName}</strong>, ИНН {clinic.inn}, ОГРН {clinic.ogrn}</p>
       </div>
 
-      <p class="text-[var(--text-muted)]">
+      <p style="color: var(--text-muted);">
         Сканы лицензии и сертификатов врачей будут добавлены после получения от клиники.
       </p>
     </div>

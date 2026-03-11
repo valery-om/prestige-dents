@@ -4,6 +4,15 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const doctors = (await getCollection('doctors')).sort((a, b) => a.data.order - b.data.order);
+
+function getInitials(name: string): string {
+  // Format: "Фамилия И.О." or "Фамилия Имя Отчество"
+  const parts = name.split(' ');
+  if (parts.length < 2) return parts[0]?.[0] || '?';
+  // Take capital letters after surname (initials from И.О. format or full names)
+  const initials = parts.slice(1).map(p => p[0]).join('');
+  return initials || parts[0][0];
+}
 ---
 
 <BaseLayout
@@ -11,46 +20,75 @@ const doctors = (await getCollection('doctors')).sort((a, b) => a.data.order - b
   description="Команда стоматологии Престиж: 14 врачей с опытом от 4 до 32 лет. Терапевты, хирурги, ортопед, ортодонт, гигиенисты."
   breadcrumbs={[{ name: 'Врачи', url: 'https://prestige-dents.ru/vrachi/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'Врачи', url: '/vrachi/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[1280px] mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Наши врачи</h1>
-      <p class="text-lg text-[var(--text-muted)] mb-10 max-w-2xl">
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        Наши врачи
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 1rem; max-width: 640px;">
         Команда из 14 специалистов с опытом от 4 до 32 лет. Двое врачей прошли стажировку в Израиле.
       </p>
+    </div>
+  </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <section style="padding: 80px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="doctors-grid">
         {doctors.map(doctor => (
-          <a href={`/vrachi/${doctor.data.slug}/`} class="glass-card block group">
-            <div class="w-full aspect-[3/4] rounded-lg mb-4 overflow-hidden bg-[var(--bg-alt)]">
+          <a href={`/vrachi/${doctor.data.slug}/`} class="glass-card" style="display: block; text-align: center;">
+            <div style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; background: var(--bg-alt);">
               {doctor.data.photo ? (
                 <img
                   src={doctor.data.photo}
                   alt={doctor.data.name}
-                  class="w-full h-full object-cover"
+                  style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
                   loading="lazy"
                 />
               ) : (
-                <div class="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
-                  <svg class="w-16 h-16 opacity-30" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                  </svg>
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3CA4CB, #1F7B9C); color: white; font-weight: 700; font-size: 2rem;">
+                  {getInitials(doctor.data.name)}
                 </div>
               )}
             </div>
-            <h2 class="text-base font-semibold group-hover:text-[var(--color-brand)] transition-colors">
+            <h2 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">
               {doctor.data.name}
             </h2>
-            <p class="text-sm text-[var(--color-brand)] mt-1">{doctor.data.specialty}</p>
+            <p style="font-size: 0.875rem; color: var(--color-brand); margin-top: 0.25rem;">{doctor.data.specialty}</p>
             {doctor.data.experience && (
-              <p class="text-sm text-[var(--text-muted)] mt-1">Опыт: {doctor.data.experience}</p>
+              <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">Опыт: {doctor.data.experience}</p>
             )}
           </a>
         ))}
       </div>
     </div>
   </section>
+
+  <style is:inline>
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 1024px) {
+      .doctors-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .doctors-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .doctors-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </BaseLayout>

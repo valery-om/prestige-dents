@@ -4,6 +4,18 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+
+const shortDesc: Record<string, string> = {
+  terapiya: 'Лечение кариеса и пульпита. Безболезненная анестезия гелем.',
+  protezirovanie: 'Коронки, виниры, съёмные протезы. Металлокерамика и цирконий.',
+  implantaciya: 'Немецкие и швейцарские системы. AI-планирование.',
+  ortodontiya: 'Брекеты и элайнеры для детей и взрослых.',
+  'gigiena-i-otbelivanie': 'Air Flow, ультразвук, реминерализация.',
+  hirurgiya: 'Простое и сложное удаление. Безболезненно.',
+  diagnostika: '3D-снимки (КЛКТ) с AI-анализом Diagnocat.',
+  parodontologiya: 'Лечение дёсен: пародонтит, гингивит.',
+  'detskaya-stomatologiya': 'Молочные зубы, цветные пломбы. Без страха.',
+};
 ---
 
 <BaseLayout
@@ -11,26 +23,33 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
   description="Все стоматологические услуги клиники Престиж: лечение, протезирование, имплантация, ортодонтия, гигиена, хирургия, диагностика."
   breadcrumbs={[{ name: 'Услуги', url: 'https://prestige-dents.ru/uslugi/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
-    <Breadcrumbs items={[{ name: 'Услуги', url: '/uslugi/' }]} />
-  </div>
-
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[1280px] mx-auto">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Услуги</h1>
-      <p class="text-lg text-[var(--text-muted)] mb-10 max-w-2xl">
-        Полный спектр стоматологических услуг для всей семьи — от профилактики до сложной имплантации.
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <Breadcrumbs items={[{ name: 'Услуги', url: '/uslugi/' }]} />
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-top: 1.5rem; font-weight: 700;">
+        Услуги клиники
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0.75rem; max-width: 640px;">
+        Полный спектр стоматологической помощи для всей семьи
       </p>
+    </div>
+  </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Cards -->
+  <section style="padding: 60px 0 80px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
         {services.map(service => (
-          <a href={`/uslugi/${service.data.slug}/`} class="glass-card block group">
-            <h2 class="text-lg font-semibold mb-2 group-hover:text-[var(--color-brand)] transition-colors">
+          <a href={`/uslugi/${service.data.slug}/`} class="card" style="display: block; text-decoration: none; color: inherit;">
+            <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">
               {service.data.title}
             </h2>
-            <p class="text-sm text-[var(--text-muted)] mb-3">{service.data.description}</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              {shortDesc[service.data.slug] || ''}
+            </p>
             {service.data.priceFrom && (
-              <p class="text-sm font-semibold text-[var(--color-brand)]">
+              <p style="font-size: 0.95rem; font-weight: 600; color: var(--color-brand);">
                 от {service.data.priceFrom.toLocaleString('ru-RU')} ₽
               </p>
             )}
@@ -39,4 +58,13 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
       </div>
     </div>
   </section>
+
+  <style is:inline>
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 640px) {
+      .services-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </BaseLayout>

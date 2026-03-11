@@ -9,24 +9,32 @@ import clinic from '../data/clinic.json';
   description={`Отзывы пациентов о стоматологии Престиж в Магнитогорске. Рейтинг 4.9 в 2ГИС, более 270 отзывов.`}
   breadcrumbs={[{ name: 'Отзывы', url: 'https://prestige-dents.ru/otzyvy/' }]}
 >
-  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+  <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
     <Breadcrumbs items={[{ name: 'Отзывы', url: '/otzyvy/' }]} />
   </div>
 
-  <section class="py-[var(--section-py)] px-[var(--section-px)]">
-    <div class="max-w-[800px] mx-auto text-center">
-      <h1 class="text-3xl md:text-4xl font-bold mb-4">Отзывы</h1>
-      <p class="text-lg text-[var(--text-muted)] mb-8">
-        Рейтинг <strong class="text-[var(--text)]">4.9</strong> в 2ГИС — лучший среди стоматологий Магнитогорска. Более 270 отзывов.
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 0.75rem; font-weight: 700;">
+        Отзывы
+        <span style="display: block; height: 4px; width: 64px; background: var(--color-brand); border-radius: 9999px; margin-top: 0.75rem;"></span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 1rem;">
+        Рейтинг <strong style="color: var(--text);">4.9</strong> в 2ГИС — лучший среди стоматологий Магнитогорска. Более 270 отзывов.
       </p>
+    </div>
+  </section>
 
-      <div class="flex flex-wrap justify-center gap-4 mb-12">
+  <section style="padding: 80px 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
         <a href="https://2gis.ru/magnitogorsk/firm/70000001066803728/tab/reviews" target="_blank" rel="noopener" class="btn-brand">Отзывы в 2ГИС</a>
         <a href="https://prodoctorov.ru/magnitogorsk/lpu/89919-prestizh/" target="_blank" rel="noopener" class="btn-outline">ПроДокторов</a>
         <a href="https://zoon.ru/magnitogorsk/medical/stomatologiya_prestizh_na_prospekte_lenina/" target="_blank" rel="noopener" class="btn-outline">Zoon</a>
       </div>
 
-      <p class="text-sm text-[var(--text-muted)]">
+      <p style="font-size: 0.875rem; color: var(--text-muted);">
         Виджет с отзывами будет подключён в Phase 5.
       </p>
     </div>

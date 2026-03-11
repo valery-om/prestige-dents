@@ -3,6 +3,7 @@ name: "Толкачева Екатерина Владимировна"
 slug: "tolkacheva-ev"
 specialty: "Стоматолог-ортодонт"
 experience: "5 лет"
+photo: /images/doctors/tolkacheva-ev.jpg
 shortDescription: "Ортодонт с 5-летним опытом. Собранный и скрупулёзный подход."
 education: "СамГМУ, 2021 + ординатура БГМУ, 2024"
 order: 12
