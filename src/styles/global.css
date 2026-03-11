@@ -1,1 +1,238 @@
 @import "tailwindcss";
+@import './fonts.css';
+
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — Glass Medical Tech
+   Brand: Стоматология Престиж
+   Font: Inter (variable, self-hosted)
+   ═══════════════════════════════════════════════ */
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-brand: #3CA4CB;
+  --color-brand-dark: #1F7B9C;
+  --color-brand-light: #66C0CC;
+  --color-brand-pale: #e8f6fa;
+  --color-accent: #DA5A5B;
+  --color-accent-dark: #c44e4f;
+  --radius-glass: 16px;
+  --width-content: 1280px;
+}
+
+:root {
+  /* Semantic tokens — Light theme */
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
+  --bg: #ffffff;
+  --bg-alt: #f8fafb;
+  --border: rgba(60, 164, 203, 0.12);
+
+  /* Glassmorphism */
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(60, 164, 203, 0.15);
+  --glass-shadow: 0 8px 32px rgba(60, 164, 203, 0.08);
+
+  /* Spacing scale (8px base) */
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 2rem;
+  --space-l: 4rem;
+  --space-xl: 8rem;
+
+  /* Section padding */
+  --section-py: clamp(2.5rem, 6vh, 5rem);
+  --section-px: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* ═══ Dark theme ═══ */
+:root[data-theme="dark"] {
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --bg: #0f172a;
+  --bg-alt: #1e293b;
+  --border: rgba(60, 164, 203, 0.2);
+
+  --glass: rgba(30, 41, 59, 0.7);
+  --glass-border: rgba(60, 164, 203, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══ System dark preference ═══ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="accessible"]) {
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --border: rgba(60, 164, 203, 0.2);
+
+    --glass: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(60, 164, 203, 0.25);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ═══ Reset ═══ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ═══ Base typography ═══ */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.9375rem, 0.875rem + 0.25vw, 1.0625rem);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+a {
+  color: var(--color-brand);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+a:hover {
+  color: var(--color-brand-dark);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ═══ Glass card ═══ */
+.glass-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.25s ease;
+}
+.glass-card:hover {
+  border-color: var(--color-brand);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(60, 164, 203, 0.15);
+}
+
+/* ═══ CTA button ═══ */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.btn-cta:hover {
+  background: var(--color-accent-dark);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(218, 90, 91, 0.3);
+}
+
+/* ═══ Brand button ═══ */
+.btn-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: var(--color-brand);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.btn-brand:hover {
+  background: var(--color-brand-dark);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(60, 164, 203, 0.3);
+}
+
+/* ═══ Outline button ═══ */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--color-brand);
+  border: 2px solid var(--color-brand);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background: var(--color-brand);
+  color: #ffffff;
+}
+
+/* ═══ Reveal animation ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+
+/* ═══ Section divider ═══ */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ═══ Reduced motion ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html { scroll-behavior: auto; }
+}
