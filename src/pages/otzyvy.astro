@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import clinic from '../data/clinic.json';
+---
+
+<BaseLayout
+  title={`Отзывы — ${clinic.name}`}
+  description={`Отзывы пациентов о стоматологии Престиж в Магнитогорске. Рейтинг 4.9 в 2ГИС, более 270 отзывов.`}
+  breadcrumbs={[{ name: 'Отзывы', url: 'https://prestige-dents.ru/otzyvy/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'Отзывы', url: '/otzyvy/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[800px] mx-auto text-center">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Отзывы</h1>
+      <p class="text-lg text-[var(--text-muted)] mb-8">
+        Рейтинг <strong class="text-[var(--text)]">4.9</strong> в 2ГИС — лучший среди стоматологий Магнитогорска. Более 270 отзывов.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <a href="https://2gis.ru/magnitogorsk/firm/70000001066803728/tab/reviews" target="_blank" rel="noopener" class="btn-brand">Отзывы в 2ГИС</a>
+        <a href="https://prodoctorov.ru/magnitogorsk/lpu/89919-prestizh/" target="_blank" rel="noopener" class="btn-outline">ПроДокторов</a>
+        <a href="https://zoon.ru/magnitogorsk/medical/stomatologiya_prestizh_na_prospekte_lenina/" target="_blank" rel="noopener" class="btn-outline">Zoon</a>
+      </div>
+
+      <p class="text-sm text-[var(--text-muted)]">
+        Виджет с отзывами будет подключён в Phase 5.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
