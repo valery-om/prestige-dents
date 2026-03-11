@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Услуги стоматологии Престиж в Магнитогорске"
+  description="Все стоматологические услуги клиники Престиж: лечение, протезирование, имплантация, ортодонтия, гигиена, хирургия, диагностика."
+  breadcrumbs={[{ name: 'Услуги', url: 'https://prestige-dents.ru/uslugi/' }]}
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[{ name: 'Услуги', url: '/uslugi/' }]} />
+  </div>
+
+  <section class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Услуги</h1>
+      <p class="text-lg text-[var(--text-muted)] mb-10 max-w-2xl">
+        Полный спектр стоматологических услуг для всей семьи — от профилактики до сложной имплантации.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map(service => (
+          <a href={`/uslugi/${service.data.slug}/`} class="glass-card block group">
+            <h2 class="text-lg font-semibold mb-2 group-hover:text-[var(--color-brand)] transition-colors">
+              {service.data.title}
+            </h2>
+            <p class="text-sm text-[var(--text-muted)] mb-3">{service.data.description}</p>
+            {service.data.priceFrom && (
+              <p class="text-sm font-semibold text-[var(--color-brand)]">
+                от {service.data.priceFrom.toLocaleString('ru-RU')} ₽
+              </p>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+import clinic from '../../data/clinic.json';
+
+export async function getStaticPaths() {
+  const doctors = await getCollection('doctors');
+  return doctors.map(doctor => ({
+    params: { slug: doctor.data.slug },
+    props: { doctor },
+  }));
+}
+
+const { doctor } = Astro.props;
+const { Content } = await render(doctor);
+
+const physicianSchema = {
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": doctor.data.name,
+  "description": doctor.data.shortDescription,
+  "url": `https://prestige-dents.ru/vrachi/${doctor.data.slug}/`,
+  "image": doctor.data.photo ? `https://prestige-dents.ru${doctor.data.photo}` : undefined,
+  "medicalSpecialty": doctor.data.specialty,
+  "worksFor": {
+    "@type": "Dentist",
+    "name": clinic.name,
+    "telephone": clinic.phoneRaw,
+  },
+};
+---
+
+<BaseLayout
+  title={`${doctor.data.name} — ${doctor.data.specialty} | ${clinic.name}`}
+  description={`${doctor.data.name}, ${doctor.data.specialty.toLowerCase()}. ${doctor.data.shortDescription} Стоматология Престиж, Магнитогорск.`}
+  breadcrumbs={[
+    { name: 'Врачи', url: 'https://prestige-dents.ru/vrachi/' },
+    { name: doctor.data.name, url: `https://prestige-dents.ru/vrachi/${doctor.data.slug}/` },
+  ]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(physicianSchema)} />
+  </Fragment>
+
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)]">
+    <Breadcrumbs items={[
+      { name: 'Врачи', url: '/vrachi/' },
+      { name: doctor.data.name, url: `/vrachi/${doctor.data.slug}/` },
+    ]} />
+  </div>
+
+  <article class="py-[var(--section-py)] px-[var(--section-px)]">
+    <div class="max-w-[1280px] mx-auto">
+      <div class="flex flex-col md:flex-row gap-8 mb-10">
+        <!-- Photo -->
+        <div class="w-full md:w-1/3 max-w-[300px]">
+          <div class="aspect-[3/4] rounded-xl overflow-hidden bg-[var(--bg-alt)]">
+            {doctor.data.photo ? (
+              <img
+                src={doctor.data.photo}
+                alt={doctor.data.name}
+                class="w-full h-full object-cover"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
+                <svg class="w-24 h-24 opacity-30" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="flex-1">
+          <h1 class="text-3xl md:text-4xl font-bold mb-2">{doctor.data.name}</h1>
+          <p class="text-lg text-[var(--color-brand)] font-medium mb-2">{doctor.data.specialty}</p>
+          {doctor.data.experience && (
+            <p class="text-[var(--text-muted)] mb-2">Стаж: {doctor.data.experience}</p>
+          )}
+          {doctor.data.education && (
+            <p class="text-[var(--text-muted)] mb-4">Образование: {doctor.data.education}</p>
+          )}
+          <p class="text-[var(--text)]">{doctor.data.shortDescription}</p>
+        </div>
+      </div>
+
+      <div class="max-w-[800px] service-content">
+        <Content />
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/kontakty/#zapis" class="btn-cta">Записаться к врачу</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
