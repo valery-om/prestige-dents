@@ -1,0 +1,47 @@
+{
+  "name": "Семейная стоматология «Престиж»",
+  "legalName": "ООО «ВИД»",
+  "inn": "7445042270",
+  "ogrn": "1087445004107",
+  "license": {
+    "number": "Л041-01024-74/00332049",
+    "date": "2019-06-07",
+    "authority": "Минздрав Челябинской области",
+    "status": "active"
+  },
+  "address": {
+    "full": "455048, Челябинская область, г. Магнитогорск, просп. Ленина, 131, корп. 1, пом. 5, 6",
+    "city": "Магнитогорск",
+    "street": "просп. Ленина, 131, корп. 1",
+    "district": "Орджоникидзевский район",
+    "postalCode": "455048",
+    "region": "Челябинская область",
+    "country": "RU"
+  },
+  "geo": {
+    "latitude": 53.3695096,
+    "longitude": 58.9922979
+  },
+  "phone": "+7 (3519) 51-05-00",
+  "phoneRaw": "+73519510500",
+  "whatsapp": "+7 967 868 01 01",
+  "whatsappRaw": "+79678680101",
+  "email": "prestig.vid@mail.ru",
+  "hours": {
+    "weekdays": "Пн–Пт 9:00–20:00",
+    "weekends": "Сб–Вс 9:00–15:00",
+    "schema": [
+      { "days": ["Mo", "Tu", "We", "Th", "Fr"], "opens": "09:00", "closes": "20:00" },
+      { "days": ["Sa", "Su"], "opens": "09:00", "closes": "15:00" }
+    ]
+  },
+  "slogan": "Ваша улыбка — наш престиж",
+  "socials": {
+    "instagram": "https://www.instagram.com/prestige_mgn/",
+    "vk": "https://vk.com/prestige_mgn",
+    "ok": "https://ok.ru/group/68846077870137"
+  },
+  "analytics": {
+    "yandexMetrika": "88421113"
+  }
+}
