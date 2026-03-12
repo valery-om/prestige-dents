@@ -40,13 +40,13 @@ const currentPath = Astro.url.pathname;
             )}
           </a>
           {item.children && (
-            <ul class="absolute top-full left-0 mt-1 py-2 min-w-[220px] rounded-xl bg-[var(--bg)] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" style="border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
+            <ul class="absolute top-full left-0 mt-1 py-3 min-w-[240px] rounded-xl bg-[var(--bg)] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200" style="border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.12);">
               {item.children.map(child => (
                 <li>
                   <a
                     href={child.href}
                     class:list={[
-                      'block px-4 py-2 text-sm hover:bg-[var(--color-brand-pale)] transition-colors',
+                      'block px-5 py-2.5 text-sm hover:bg-[var(--color-brand-pale)] transition-colors',
                       currentPath === child.href ? 'text-[var(--color-brand)] font-semibold' : 'text-[var(--text)]',
                     ]}
                   >
