@@ -1,7 +1,7 @@
 ---
 name: "Слинкина Римма Ильинична"
 slug: "slinkina-ri"
-specialty: "Стоматолог-терапевт"
+specialty: "Стоматолог-терапевт, пародонтолог"
 experience: "32 года"
 photo: "/images/doctors/slinkina-ri.jpg"
 shortDescription: "32 года опыта. Комплексный подход."

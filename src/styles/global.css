@@ -106,7 +106,16 @@ a:hover {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+}
+
+table {
+  max-width: 100%;
+}
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ═══ Card — clean white with subtle shadow ═══ */
@@ -293,6 +302,21 @@ img {
 .blog-content em {
   font-style: italic;
   color: var(--text-muted);
+}
+
+/* ═══ Mobile responsiveness ═══ */
+@media (max-width: 640px) {
+  .card,
+  .glass-card {
+    padding: 1rem;
+  }
+
+  .btn-cta,
+  .btn-brand,
+  .btn-outline {
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 /* ═══ Reduced motion ═══ */

@@ -187,4 +187,16 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
       </div>
     </div>
   </section>
+  <style is:inline>
+    .glass-card > div[style*="overflow-x"] {
+      -webkit-overflow-scrolling: touch;
+    }
+    @media (max-width: 640px) {
+      .glass-card table td,
+      .glass-card table th {
+        padding: 0.5rem 0.5rem !important;
+        font-size: 0.8rem !important;
+      }
+    }
+  </style>
 </BaseLayout>

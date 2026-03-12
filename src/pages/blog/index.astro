@@ -64,8 +64,16 @@ function formatDate(date: Date): string {
   </section>
 
   <style is:inline>
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; }
+    }
     @media (max-width: 640px) {
       .blog-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .blog-grid .card {
+        padding: 1rem !important;
+      }
     }
   </style>
 </BaseLayout>

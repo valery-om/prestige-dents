@@ -60,3 +60,11 @@
   outline: 3px solid #000000;
   outline-offset: 2px;
 }
+
+/* Accessible mode + mobile adjustments */
+@media (max-width: 640px) {
+  :root[data-theme="accessible"] body {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+}

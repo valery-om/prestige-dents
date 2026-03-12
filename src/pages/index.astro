@@ -30,7 +30,7 @@ function getInitials(name: string): string {
 <BaseLayout>
 
   <!-- ===== HERO WITH VIDEO ===== -->
-  <section style="position: relative; overflow: hidden; padding: 100px 0 120px; min-height: 500px;">
+  <section class="hero-section" style="position: relative; overflow: hidden; padding: 100px 0 120px; min-height: 500px;">
     <video
       autoplay
       muted
@@ -43,13 +43,13 @@ function getInitials(name: string): string {
     </video>
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(60,164,203,0.45) 0%, rgba(42,143,181,0.55) 100%); z-index: 1;"></div>
     <div style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
-      <h1 style="font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; margin-bottom: 1.25rem; line-height: 1.2;">
+      <h1 class="hero-title" style="font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; margin-bottom: 1.25rem; line-height: 1.2;">
         Семейная стоматология<br/>в Магнитогорске
       </h1>
       <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; font-weight: 400;">
         Ваша улыбка — наш престиж
       </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <div class="hero-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="/kontakty/#zapis" class="btn-cta" style="padding: 1rem 3rem; font-size: 1.1rem;">
           Записаться на приём
         </a>
@@ -62,9 +62,9 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== USP STATS ===== -->
-  <section style="padding: 80px 0;">
+  <section class="section-padded" style="padding: 80px 0;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
+      <div class="stats-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;">
         <div style="text-align: center;">
           <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="var(--color-brand)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -98,14 +98,14 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== SERVICES ===== -->
-  <section style="padding: 80px 0; background: var(--bg-alt);">
+  <section class="section-padded" style="padding: 80px 0; background: var(--bg-alt);">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
       <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Наши услуги</h2>
       <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
         Полный спектр стоматологической помощи для всей семьи
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+      <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
         {services.map((service) => (
           <a href={`/uslugi/${service.data.slug}/`}
             class="card"
@@ -132,14 +132,14 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== DOCTORS ===== -->
-  <section style="padding: 80px 0;">
+  <section class="section-padded" style="padding: 80px 0;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
       <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Наши врачи</h2>
       <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
         Команда из 14 специалистов с опытом от 4 до 32 лет
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;">
+      <div class="doctors-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;">
         {doctors.slice(0, 8).map((doctor) => (
           <a href={`/vrachi/${doctor.data.slug}/`} style="text-decoration: none; color: inherit; text-align: center; display: block;">
             <div style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; border: 3px solid var(--color-brand-pale);">
@@ -171,11 +171,11 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== WHY US ===== -->
-  <section style="padding: 80px 0; background: var(--bg-alt);">
+  <section class="section-padded" style="padding: 80px 0; background: var(--bg-alt);">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
       <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 4rem;">Почему выбирают нас</h2>
 
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;">
+      <div class="whyus-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem;">
         <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
           <div style="width: 64px; height: 64px; min-width: 64px; border-radius: 50%; background: var(--color-brand-pale); display: flex; align-items: center; justify-content: center;">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><circle cx="15" cy="10" r="1.5" fill="var(--color-brand)" stroke="none"/><path d="M9 15c1 1.5 5 1.5 6 0"/></svg>
@@ -217,14 +217,14 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== EQUIPMENT ===== -->
-  <section style="padding: 80px 0;">
+  <section class="section-padded" style="padding: 80px 0;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
       <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Что это значит для вас</h2>
       <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
         Технологии, которые делают лечение точнее, быстрее и комфортнее
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+      <div class="equipment-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
         <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
           <div style="width: 56px; height: 56px; margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center;">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-brand)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
@@ -284,7 +284,7 @@ function getInitials(name: string): string {
   </section>
 
   <!-- ===== CTA ===== -->
-  <section style="padding: 80px 0; background: linear-gradient(135deg, #3CA4CB 0%, #2a8fb5 100%);">
+  <section class="section-padded" style="padding: 80px 0; background: linear-gradient(135deg, #3CA4CB 0%, #2a8fb5 100%);">
     <div style="max-width: 700px; margin: 0 auto; padding: 0 2rem; text-align: center;">
       <h2 style="font-size: clamp(1.75rem, 4vw, 2.25rem); color: #fff; margin-bottom: 1rem;">Запишитесь на приём</h2>
       <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem;">
@@ -304,5 +304,80 @@ function getInitials(name: string): string {
       </div>
     </div>
   </section>
+
+  <style is:inline>
+    /* ===== MOBILE RESPONSIVENESS ===== */
+
+    /* 1024px — Doctors grid: 3 columns */
+    @media (max-width: 1024px) {
+      .doctors-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+    }
+
+    /* 768px — Tablet breakpoint */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 60px 0 80px !important;
+        min-height: 400px !important;
+      }
+      .section-padded {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .doctors-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      .equipment-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+
+    /* 640px — Why Us: 1 column */
+    @media (max-width: 640px) {
+      .whyus-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* 480px — Small phone breakpoint */
+    @media (max-width: 480px) {
+      .hero-section {
+        padding: 40px 0 60px !important;
+        min-height: 350px !important;
+      }
+      .hero-title {
+        font-size: 1.5rem !important;
+      }
+      .section-padded {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+      }
+      .stats-grid {
+        gap: 1rem !important;
+      }
+      .services-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .doctors-grid {
+        gap: 1.5rem !important;
+      }
+      .equipment-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .hero-buttons a {
+        padding: 0.75rem 1.5rem !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        justify-content: center !important;
+      }
+    }
+  </style>
 
 </BaseLayout>

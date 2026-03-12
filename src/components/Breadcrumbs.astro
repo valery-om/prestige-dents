@@ -12,8 +12,8 @@ const { items } = Astro.props;
 const allItems = [{ name: 'Главная', url: '/' }, ...items];
 ---
 
-<nav aria-label="Хлебные крошки" class="text-sm text-[var(--text-muted)] py-3">
-  <ol class="flex flex-wrap items-center gap-1.5">
+<nav aria-label="Хлебные крошки" class="breadcrumbs-nav text-sm text-[var(--text-muted)] py-3">
+  <ol class="flex flex-wrap items-center gap-1.5 sm:flex-wrap">
     {allItems.map((item, i) => (
       <li class="flex items-center">
         {i > 0 && (
@@ -30,3 +30,16 @@ const allItems = [{ name: 'Главная', url: '/' }, ...items];
     ))}
   </ol>
 </nav>
+
+<style>
+  @media (max-width: 640px) {
+    .breadcrumbs-nav {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .breadcrumbs-nav ol {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+  }
+</style>

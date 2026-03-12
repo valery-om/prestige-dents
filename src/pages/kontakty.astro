@@ -117,5 +117,13 @@ const iconClock = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" f
         grid-template-columns: 1fr;
       }
     }
+    @media (max-width: 480px) {
+      .contacts-grid iframe {
+        height: 300px !important;
+      }
+      .contacts-grid > div:last-child > div {
+        height: 300px !important;
+      }
+    }
   </style>
 </BaseLayout>

@@ -13,7 +13,7 @@ import clinic from '../data/clinic.json';
         </a>
         <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.25rem;">{clinic.slogan}</p>
         <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
-          <a href={`tel:${clinic.phoneRaw}`} style="font-weight: 600; color: var(--text); text-decoration: none;">{clinic.phone}</a>
+          <a href={`tel:${clinic.phoneRaw}`} style="font-weight: 600; color: var(--text); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center;">{clinic.phone}</a>
           <a href={`https://wa.me/${clinic.whatsappRaw}`} target="_blank" rel="noopener" style="color: var(--text-muted); text-decoration: none;">WhatsApp: {clinic.whatsapp}</a>
           <a href={`mailto:${clinic.email}`} style="color: var(--text-muted); text-decoration: none;">{clinic.email}</a>
         </div>
@@ -100,6 +100,9 @@ import clinic from '../data/clinic.json';
   @media (max-width: 640px) {
     footer > div > div:first-child {
       grid-template-columns: 1fr !important;
+    }
+    footer > div {
+      padding: 2rem 1rem !important;
     }
   }
 </style>
