@@ -29,9 +29,20 @@ function getInitials(name: string): string {
 
 <BaseLayout>
 
-  <!-- ===== HERO ===== -->
-  <section style="background: linear-gradient(135deg, #3CA4CB 0%, #2a8fb5 100%); padding: 100px 0 120px;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
+  <!-- ===== HERO WITH VIDEO ===== -->
+  <section style="position: relative; overflow: hidden; padding: 100px 0 120px; min-height: 500px;">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;"
+    >
+      <source src="/videos/promo.mp4" type="video/mp4" />
+    </video>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(60,164,203,0.75) 0%, rgba(42,143,181,0.8) 100%); z-index: 1;"></div>
+    <div style="position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center;">
       <h1 style="font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff; margin-bottom: 1.25rem; line-height: 1.2;">
         Семейная стоматология<br/>в Магнитогорске
       </h1>
@@ -200,6 +211,49 @@ function getInitials(name: string): string {
             <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">Для всей семьи</h3>
             <p style="color: var(--text-muted); line-height: 1.7; font-size: 0.95rem;">От детской стоматологии до протезирования. Один врач ведёт всю семью.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EQUIPMENT ===== -->
+  <section style="padding: 80px 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <h2 style="font-size: clamp(1.75rem, 4vw, 2.5rem); text-align: center; margin-bottom: 0.75rem;">Что это значит для вас</h2>
+      <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 4rem;">
+        Технологии, которые делают лечение точнее, быстрее и комфортнее
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔬</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Лечение под микроскопом</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Врач видит каналы зуба с многократным увеличением. Это значит точное лечение и максимальное сохранение здоровых тканей.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Лазер вместо скальпеля</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Лечение дёсен лазером: минимум боли, быстрое заживление, стерильность. Без разрезов и швов.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">📷</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Слепки без дискомфорта</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Цифровой 3D-сканер снимает слепки за пару минут — без неприятной массы во рту. Коронки и виниры садятся идеально.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧠</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">AI проверяет снимки</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Нейросеть анализирует 3D-снимки и подсвечивает проблемы, которые легко пропустить глазом. Двойной контроль: врач + AI.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">📋</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Снимок сразу на экране</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Цифровой рентген: результат за секунды, а не за полчаса. 3D-снимок показывает зуб со всех сторон — врач видит полную картину до начала лечения.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 2rem 1.5rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">💨</div>
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Чистка без боли</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Air Flow убирает налёт мягкой воздушно-порошковой струёй — без царапин и неприятных ощущений. Зубы гладкие и чистые сразу.</p>
         </div>
       </div>
     </div>
