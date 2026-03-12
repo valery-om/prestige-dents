@@ -19,6 +19,10 @@ const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const relatedPosts = allPosts.filter(p => p.id !== post.id).slice(0, 3);
 
+const currentIndex = allPosts.findIndex(p => p.id === post.id);
+const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+
 function formatDate(date: Date): string {
   return date.toLocaleDateString('ru-RU', {
     year: 'numeric',
@@ -140,6 +144,24 @@ const articleSchema = {
         </div>
       </section>
 
+      <!-- Prev/Next Navigation -->
+      {(prevPost || nextPost) && (
+        <nav style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);">
+          {prevPost ? (
+            <a href={`/blog/${prevPost.id}/`} class="post-nav-link post-nav-prev" style="display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; max-width: 45%; color: var(--text-muted); font-size: 0.85rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Предыдущая</span>
+              <span style="color: var(--text); font-weight: 600; line-height: 1.4;">&larr; {prevPost.data.title}</span>
+            </a>
+          ) : <span />}
+          {nextPost ? (
+            <a href={`/blog/${nextPost.id}/`} class="post-nav-link post-nav-next" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; text-decoration: none; max-width: 45%; margin-left: auto; text-align: right; color: var(--text-muted); font-size: 0.85rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Следующая</span>
+              <span style="color: var(--text); font-weight: 600; line-height: 1.4;">{nextPost.data.title} &rarr;</span>
+            </a>
+          ) : <span />}
+        </nav>
+      )}
+
       <!-- Related Posts -->
       {relatedPosts.length > 0 && (
         <section style="margin-top: 60px; padding-bottom: 80px;">
@@ -179,12 +201,39 @@ const articleSchema = {
   .blog-content strong { font-weight: 600; }
   .blog-content img { max-width: 100%; height: auto; }
   .blog-content table {
-    display: block;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    text-align: left;
+  }
+  .blog-content th {
+    background: var(--bg-alt);
+    font-weight: 600;
+  }
+  .table-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    max-width: 100%;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .table-scroll-hint {
+    display: none;
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+  }
+  .post-nav-link:hover span:last-child {
+    color: #3ca4cb !important;
   }
   @media (max-width: 640px) {
+    .blog-content table { font-size: 0.8rem; }
+    .blog-content th, .blog-content td { padding: 0.5rem 0.75rem; }
+    .table-scroll-hint { display: block; }
     .related-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 480px) {
@@ -196,3 +245,16 @@ const articleSchema = {
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll('.blog-content table').forEach(table => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-scroll';
+    const hint = document.createElement('div');
+    hint.className = 'table-scroll-hint';
+    hint.textContent = 'Листайте вправо \u2192';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(hint);
+    wrapper.appendChild(table);
+  });
+</script>

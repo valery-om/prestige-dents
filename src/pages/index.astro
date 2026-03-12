@@ -106,7 +106,7 @@ function getInitials(name: string): string {
       </p>
 
       <div class="services-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-        {services.map((service) => (
+        {services.slice(0, 4).map((service) => (
           <a href={`/uslugi/${service.data.slug}/`}
             class="card"
             style="display: block; text-decoration: none; color: inherit;">
@@ -123,6 +123,29 @@ function getInitials(name: string): string {
             )}
           </a>
         ))}
+        <div id="services-more" class="services-more" style="display: contents;">
+          {services.slice(4).map((service) => (
+            <a href={`/uslugi/${service.data.slug}/`}
+              class="card"
+              style="display: block; text-decoration: none; color: inherit;">
+              <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text);">
+                {service.data.title}
+              </h3>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+                {serviceDescriptions[service.data.slug] || ''}
+              </p>
+              {service.data.priceFrom && (
+                <p style="font-size: 0.95rem; font-weight: 600; color: var(--color-brand);">
+                  от {service.data.priceFrom.toLocaleString('ru-RU')} ₽
+                </p>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem;" class="lg-hidden">
+        <button id="services-toggle" class="btn-outline" style="cursor: pointer;">Показать все услуги</button>
       </div>
 
       <div style="text-align: center; margin-top: 3rem;">
@@ -140,7 +163,7 @@ function getInitials(name: string): string {
       </p>
 
       <div class="doctors-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem;">
-        {doctors.slice(0, 8).map((doctor) => (
+        {doctors.slice(0, 4).map((doctor) => (
           <a href={`/vrachi/${doctor.data.slug}/`} style="text-decoration: none; color: inherit; text-align: center; display: block;">
             <div style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; border: 3px solid var(--color-brand-pale);">
               {doctor.data.photo ? (
@@ -162,6 +185,30 @@ function getInitials(name: string): string {
             )}
           </a>
         ))}
+        <div id="doctors-more" class="doctors-more" style="display: contents;">
+          {doctors.slice(4, 8).map((doctor) => (
+            <a href={`/vrachi/${doctor.data.slug}/`} style="text-decoration: none; color: inherit; text-align: center; display: block;">
+              <div style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; border: 3px solid var(--color-brand-pale);">
+                {doctor.data.photo ? (
+                  <img src={doctor.data.photo} alt={doctor.data.name}
+                    style="width: 100%; height: 100%; object-fit: cover; object-position: top;"
+                    loading="lazy" />
+                ) : (
+                  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3CA4CB, #1F7B9C); color: white; font-weight: 700; font-size: 2rem;">
+                    {getInitials(doctor.data.name)}
+                  </div>
+                )}
+              </div>
+              <p style="font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem;">{doctor.data.name.split(' ').slice(0, 2).join(' ')}</p>
+              <p style="font-size: 0.875rem; color: var(--text-muted);">{doctor.data.specialty}</p>
+              {doctor.data.experience && (
+                <p style="font-size: 0.8rem; color: var(--color-brand); margin-top: 0.25rem; font-weight: 500;">
+                  Стаж: {doctor.data.experience}
+                </p>
+              )}
+            </a>
+          ))}
+        </div>
       </div>
 
       <div style="text-align: center; margin-top: 3rem;">
@@ -306,6 +353,16 @@ function getInitials(name: string): string {
   </section>
 
   <style is:inline>
+    /* ===== SHOW MORE TOGGLE ===== */
+    .lg-hidden { display: none; }
+
+    @media (max-width: 768px) {
+      .lg-hidden { display: block; }
+      .services-more { display: none !important; }
+      .services-more.services-expanded { display: contents !important; }
+      .doctors-more { display: none !important; }
+    }
+
     /* ===== MOBILE RESPONSIVENESS ===== */
 
     /* 1024px — Doctors grid: 3 columns */
@@ -379,5 +436,18 @@ function getInitials(name: string): string {
       }
     }
   </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('services-toggle');
+      var more = document.getElementById('services-more');
+      if (btn && more) {
+        btn.addEventListener('click', function() {
+          var expanded = more.classList.toggle('services-expanded');
+          btn.textContent = expanded ? 'Свернуть' : 'Показать все услуги';
+        });
+      }
+    });
+  </script>
 
 </BaseLayout>

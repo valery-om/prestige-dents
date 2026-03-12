@@ -6,11 +6,17 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const categoryColors: Record<string, string> = {
-  'FAQ': '#3ca4cb',
-  'Услуга': '#3ca4cb',
-  'Детская': '#3ca4cb',
-};
+const categories = [...new Set(posts.map(p => p.data.category))].sort();
+const totalCount = posts.length;
+
+function pluralizeArticles(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return 'статья';
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'статьи';
+  return 'статей';
+}
+const totalLabel = `${totalCount} ${pluralizeArticles(totalCount)}`;
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('ru-RU', {
@@ -39,12 +45,47 @@ function formatDate(date: Date): string {
     </div>
   </section>
 
+  <!-- Search & Filters -->
+  <section style="padding: 40px 0 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <!-- Search -->
+      <div style="position: relative; max-width: 480px; margin-bottom: 1.5rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-muted); pointer-events: none;">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input
+          type="text"
+          id="blog-search"
+          placeholder="Поиск по статьям..."
+          style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.75rem; border: 1px solid var(--border); border-radius: 50px; font-size: 0.95rem; background: var(--bg); color: var(--text); outline: none; box-sizing: border-box;"
+        />
+      </div>
+
+      <!-- Category pills -->
+      <div id="category-filters" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <button class="cat-pill active" data-category="all" style="padding: 0.4rem 1rem; border-radius: 50px; border: 1px solid var(--border); background: #3ca4cb; color: #fff; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+          Все
+        </button>
+        {categories.map(cat => (
+          <button class="cat-pill" data-category={cat} style="padding: 0.4rem 1rem; border-radius: 50px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Article count -->
+      <p id="article-count" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        {totalLabel}
+      </p>
+    </div>
+  </section>
+
   <!-- Cards -->
-  <section style="padding: 60px 0 80px;">
+  <section style="padding: 20px 0 80px;">
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
       <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem;">
         {posts.map(post => (
-          <a href={`/blog/${post.id}/`} class="card" style="display: block; text-decoration: none; color: inherit;">
+          <a href={`/blog/${post.id}/`} class="card blog-card" data-category={post.data.category} data-title={post.data.title.toLowerCase()} style="display: block; text-decoration: none; color: inherit;">
             <span style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; background: #3ca4cb; color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.75rem;">
               {post.data.category}
             </span>
@@ -60,10 +101,26 @@ function formatDate(date: Date): string {
           </a>
         ))}
       </div>
+      <p id="no-results" style="display: none; text-align: center; color: var(--text-muted); padding: 3rem 0; font-size: 1rem;">
+        Ничего не найдено. Попробуйте другой запрос.
+      </p>
     </div>
   </section>
 
   <style is:inline>
+    #blog-search:focus {
+      border-color: #3ca4cb;
+      box-shadow: 0 0 0 3px rgba(60, 164, 203, 0.15);
+    }
+    .cat-pill:hover {
+      border-color: #3ca4cb !important;
+      color: #3ca4cb !important;
+    }
+    .cat-pill.active {
+      background: #3ca4cb !important;
+      color: #fff !important;
+      border-color: #3ca4cb !important;
+    }
     @media (max-width: 768px) {
       .blog-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; }
     }
@@ -76,4 +133,57 @@ function formatDate(date: Date): string {
       }
     }
   </style>
+
+  <script>
+    const searchInput = document.getElementById('blog-search') as HTMLInputElement;
+    const pills = document.querySelectorAll('.cat-pill');
+    const cards = document.querySelectorAll('.blog-card') as NodeListOf<HTMLElement>;
+    const countEl = document.getElementById('article-count');
+    const noResults = document.getElementById('no-results') as HTMLElement;
+
+    let activeCategory = 'all';
+
+    function pluralize(n: number): string {
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'статья';
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'статьи';
+      return 'статей';
+    }
+
+    function filterCards() {
+      const query = searchInput.value.toLowerCase().trim();
+      let visible = 0;
+
+      cards.forEach(card => {
+        const category = card.dataset.category || '';
+        const title = card.dataset.title || '';
+        const matchesCategory = activeCategory === 'all' || category === activeCategory;
+        const matchesSearch = !query || title.includes(query);
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (countEl) {
+        countEl.textContent = `${visible} ${pluralize(visible)}`;
+      }
+      noResults.style.display = visible === 0 ? '' : 'none';
+    }
+
+    searchInput.addEventListener('input', filterCards);
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = (pill as HTMLElement).dataset.category || 'all';
+        filterCards();
+      });
+    });
+  </script>
 </BaseLayout>
