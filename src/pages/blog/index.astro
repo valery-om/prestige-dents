@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categoryColors: Record<string, string> = {
+  'FAQ': '#3ca4cb',
+  'Услуга': '#3ca4cb',
+  'Детская': '#3ca4cb',
+};
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('ru-RU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout
+  title="Блог стоматологии Престиж — полезные статьи о здоровье зубов"
+  description="Статьи о лечении, имплантации, детской стоматологии, гигиене и уходе за зубами. Полезные советы от врачей стоматологии Престиж в Магнитогорске."
+  breadcrumbs={[{ name: 'Блог', url: 'https://prestige-dents.ru/blog/' }]}
+>
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <Breadcrumbs items={[{ name: 'Блог', url: '/blog/' }]} />
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); margin-top: 1.5rem; font-weight: 700;">
+        Блог клиники
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0.75rem; max-width: 640px;">
+        Полезные статьи о здоровье зубов от врачей стоматологии Престиж
+      </p>
+    </div>
+  </section>
+
+  <!-- Cards -->
+  <section style="padding: 60px 0 80px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+      <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem;">
+        {posts.map(post => (
+          <a href={`/blog/${post.id}/`} class="card" style="display: block; text-decoration: none; color: inherit;">
+            <span style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; background: #3ca4cb; color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.75rem;">
+              {post.data.category}
+            </span>
+            <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); line-height: 1.4;">
+              {post.data.title}
+            </h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              {post.data.description}
+            </p>
+            <time style="font-size: 0.8rem; color: var(--text-muted);" datetime={post.data.date.toISOString().slice(0, 10)}>
+              {formatDate(post.data.date)}
+            </time>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style is:inline>
+    @media (max-width: 640px) {
+      .blog-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</BaseLayout>

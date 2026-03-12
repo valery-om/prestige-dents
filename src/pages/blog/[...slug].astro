@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection, render } from 'astro:content';
+import clinic from '../../data/clinic.json';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const relatedPosts = allPosts.filter(p => p.id !== post.id).slice(0, 3);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('ru-RU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+const faqSchema = post.data.faq && post.data.faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": post.data.faq.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+} : null;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": post.data.title,
+  "description": post.data.description,
+  "url": `https://prestige-dents.ru/blog/${post.id}/`,
+  "datePublished": post.data.date.toISOString().slice(0, 10),
+  "author": {
+    "@type": "Dentist",
+    "name": clinic.name,
+    "telephone": clinic.phoneRaw,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": clinic.address.city,
+      "streetAddress": clinic.address.street,
+    },
+  },
+  "publisher": {
+    "@type": "Dentist",
+    "name": clinic.name,
+  },
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} — ${clinic.name}`}
+  description={post.data.description}
+  breadcrumbs={[
+    { name: 'Блог', url: 'https://prestige-dents.ru/blog/' },
+    { name: post.data.title, url: `https://prestige-dents.ru/blog/${post.id}/` },
+  ]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+  </Fragment>
+
+  <!-- Hero -->
+  <section style="background: var(--bg-alt); padding: 40px 0 50px;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <Breadcrumbs items={[
+        { name: 'Блог', url: '/blog/' },
+        { name: post.data.title, url: `/blog/${post.id}/` },
+      ]} />
+      <span style="display: inline-block; padding: 0.25rem 0.75rem; border-radius: 50px; background: #3ca4cb; color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; margin-top: 1.5rem;">
+        {post.data.category}
+      </span>
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; margin-top: 0.75rem; margin-bottom: 1rem; line-height: 1.2;">
+        {post.data.title}
+      </h1>
+      <time style="font-size: 0.9rem; color: var(--text-muted);" datetime={post.data.date.toISOString().slice(0, 10)}>
+        {formatDate(post.data.date)}
+      </time>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <article style="padding: 60px 0 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 2rem;">
+      <div class="blog-content" style="line-height: 1.8;">
+        <Content />
+      </div>
+
+      {post.data.faq && post.data.faq.length > 0 && (
+        <section style="margin-top: 60px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Частые вопросы</h2>
+          <div style="border-top: 1px solid var(--border);">
+            {post.data.faq.map(item => (
+              <details class="faq-item" style="border-bottom: 1px solid var(--border);">
+                <summary style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; cursor: pointer; font-weight: 600; font-size: 1rem; color: var(--text); list-style: none;">
+                  <span>{item.question}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex-shrink: 0; color: var(--text-muted); transition: transform 0.3s;" class="chevron">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </summary>
+                <div style="padding: 0 0 1.25rem; color: var(--text-muted); line-height: 1.7;">
+                  <p>{item.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- CTA -->
+      <section style="margin-top: 60px; padding: 2.5rem 2rem; border-radius: 16px; background: linear-gradient(135deg, #3ca4cb, #2b8db5); color: #fff; text-align: center;">
+        <p style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Запишитесь на приём</p>
+        <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.5rem;">Консультация, диагностика и план лечения</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;">
+          <a href={`tel:${clinic.phoneRaw}`} style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; border-radius: 50px; background: #fff; color: #2b8db5; text-decoration: none; font-weight: 600; font-size: 0.95rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            {clinic.phone}
+          </a>
+          <a href="https://wa.me/79678680101" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 2rem; border-radius: 50px; background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.3);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 0 0 .611.611l4.458-1.495A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.344 0-4.521-.764-6.28-2.058l-.396-.307-2.65.888.888-2.65-.307-.396A9.953 9.953 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <!-- Related Posts -->
+      {relatedPosts.length > 0 && (
+        <section style="margin-top: 60px; padding-bottom: 80px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Читайте также</h2>
+          <div class="related-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem;">
+            {relatedPosts.map(rp => (
+              <a href={`/blog/${rp.id}/`} class="card" style="display: block; text-decoration: none; color: inherit;">
+                <span style="display: inline-block; padding: 0.2rem 0.6rem; border-radius: 50px; background: #3ca4cb; color: #fff; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem;">
+                  {rp.data.category}
+                </span>
+                <h3 style="font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 0.5rem;">
+                  {rp.data.title}
+                </h3>
+                <time style="font-size: 0.75rem; color: var(--text-muted);" datetime={rp.data.date.toISOString().slice(0, 10)}>
+                  {formatDate(rp.data.date)}
+                </time>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chevron { transform: rotate(180deg); }
+</style>
+
+<style is:inline>
+  .blog-content h2 { font-size: 1.35rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; }
+  .blog-content h3 { font-size: 1.15rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.75rem; }
+  .blog-content p { margin-bottom: 1.25rem; color: var(--text); }
+  .blog-content ul, .blog-content ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+  .blog-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+  .blog-content strong { font-weight: 600; }
+  @media (max-width: 640px) {
+    .related-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
