@@ -1,0 +1,143 @@
+---
+---
+<div
+  id="accessibility-panel"
+  class="w-full hidden"
+  role="region"
+  aria-label="Настройки доступности"
+>
+  <div class="max-w-[1280px] mx-auto px-[var(--section-px)] py-3">
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+
+      <!-- Font size -->
+      <fieldset class="a11y-group" role="radiogroup" aria-label="Размер шрифта">
+        <legend class="a11y-group-label">Размер шрифта:</legend>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="font"
+          data-value="normal"
+          aria-pressed="true"
+          aria-label="Обычный размер шрифта"
+        >A</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="font"
+          data-value="large"
+          aria-pressed="false"
+          aria-label="Увеличенный размер шрифта"
+        >A+</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="font"
+          data-value="xlarge"
+          aria-pressed="false"
+          aria-label="Крупный размер шрифта"
+        >A++</button>
+      </fieldset>
+
+      <!-- Color scheme -->
+      <fieldset class="a11y-group" role="radiogroup" aria-label="Цветовая схема">
+        <legend class="a11y-group-label">Цвета:</legend>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="colors"
+          data-value="white"
+          aria-pressed="false"
+          aria-label="Белая цветовая схема"
+        ><span class="swatch" style="background:#fff;"></span>Белая</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="colors"
+          data-value="black"
+          aria-pressed="false"
+          aria-label="Чёрная цветовая схема"
+        ><span class="swatch" style="background:#000;"></span>Чёрная</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="colors"
+          data-value="blue"
+          aria-pressed="false"
+          aria-label="Синяя цветовая схема"
+        ><span class="swatch" style="background:#063462;"></span>Синяя</button>
+      </fieldset>
+
+      <!-- Letter spacing -->
+      <fieldset class="a11y-group" role="radiogroup" aria-label="Интервал букв">
+        <legend class="a11y-group-label">Интервал букв:</legend>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="spacing"
+          data-value="normal"
+          aria-pressed="true"
+          aria-label="Обычный интервал букв"
+        >Обычный</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="spacing"
+          data-value="wide"
+          aria-pressed="false"
+          aria-label="Увеличенный интервал букв"
+        >Увеличенный</button>
+      </fieldset>
+
+      <!-- Line height -->
+      <fieldset class="a11y-group" role="radiogroup" aria-label="Интервал строк">
+        <legend class="a11y-group-label">Интервал строк:</legend>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="line"
+          data-value="normal"
+          aria-pressed="true"
+          aria-label="Обычный интервал строк"
+        >Обычный</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="line"
+          data-value="wide"
+          aria-pressed="false"
+          aria-label="Увеличенный интервал строк"
+        >Увеличенный</button>
+      </fieldset>
+
+      <!-- Images -->
+      <fieldset class="a11y-group" role="radiogroup" aria-label="Изображения">
+        <legend class="a11y-group-label">Изображения:</legend>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="images"
+          data-value="on"
+          aria-pressed="true"
+          aria-label="Показывать изображения"
+        >Включены</button>
+        <button
+          type="button"
+          class="a11y-btn"
+          data-a11y="images"
+          data-value="off"
+          aria-pressed="false"
+          aria-label="Скрыть изображения"
+        >Отключены</button>
+      </fieldset>
+
+      <!-- Reset -->
+      <button
+        type="button"
+        class="a11y-reset"
+        id="a11y-reset-btn"
+        aria-label="Сбросить настройки доступности"
+      >Сброс</button>
+
+    </div>
+  </div>
+</div>

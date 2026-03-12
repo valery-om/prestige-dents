@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/accessibility.css';
 import Nav from '../components/Nav.astro';
+import AccessibilityPanel from '../components/AccessibilityPanel.astro';
 import Footer from '../components/Footer.astro';
 import SchemaMarkup from '../components/SchemaMarkup.astro';
 import clinic from '../data/clinic.json';
@@ -49,9 +50,20 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <script is:inline>
       (function() {
         var saved = localStorage.getItem('prestige-theme');
-        if (saved) {
+        if (saved && saved !== 'accessible') {
           document.documentElement.setAttribute('data-theme', saved);
         }
+        // Apply a11y color scheme before paint to prevent FOUC
+        try {
+          var a11y = JSON.parse(localStorage.getItem('prestige-a11y') || '{}');
+          if (a11y.active && a11y.colors) {
+            var colorMap = { white: 'a11y-colors-white', black: 'a11y-colors-black', blue: 'a11y-colors-blue' };
+            if (colorMap[a11y.colors]) {
+              document.documentElement.classList.add('a11y-preload');
+              document.documentElement.setAttribute('data-a11y-color', a11y.colors);
+            }
+          }
+        } catch(e) {}
       })();
     </script>
 
@@ -79,6 +91,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       Перейти к содержанию
     </a>
     <Nav />
+    <AccessibilityPanel />
     <main id="main-content" class="flex-1">
       <slot />
     </main>
@@ -86,8 +99,10 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Reveal animation observer -->
     <script is:inline>
+      var a11yActive = false;
+      try { a11yActive = JSON.parse(localStorage.getItem('prestige-a11y') || '{}').active; } catch(e) {}
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-          document.documentElement.getAttribute('data-theme') !== 'accessible') {
+          document.documentElement.getAttribute('data-theme') !== 'accessible' && !a11yActive) {
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
